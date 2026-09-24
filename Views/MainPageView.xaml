@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Models="clr-namespace:HarryPotterPotions.Models"
+             x:Name="MainPage"
+             x:Class="HarryPotterPotions.Views.MainPageView"
+             Title="Search Potions">
+            
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Entry x:Name="NameSearch"></Entry>
+
+            <Button x:Name="ButtonSearch" Text="Search" Clicked="OnButtonClicked" />
+
+            
+
+            <CollectionView x:Name="PotionsListView"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" />
+                            
+                            <Label Text="{Binding Ingredients}" />
+                            
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Add Potion to Saved Potions" Clicked="OnAddPotionClicked" />
+
+            <CollectionView ItemsSource="{Binding SavedPotions}" x:Name="SavedPotionsList">
+                <CollectionView.EmptyView>
+                    <Label Text="No saved potions." />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" />
+
+                            
+
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Go to Shopping List" Clicked="OnGoToShoppingListClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

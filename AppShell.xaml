@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="HarryPotterPotions.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:HarryPotterPotions"
+    xmlns:views="clr-namespace:HarryPotterPotions.Views"
+    FlyoutBehavior="Flyout"
+    Title="HarryPotterPotions">
+
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent
+            ContentTemplate="{DataTemplate views:MainPageView}"
+             />
+        </Tab>
+        <Tab Title="Shopping List">
+            <ShellContent
+            ContentTemplate="{DataTemplate views:ShoppingListView}"
+             />
+        </Tab>
+        <Tab Title="Ingredient Inventory">
+            <ShellContent
+    ContentTemplate="{DataTemplate views:IngredientInventoryView}"
+     />
+        </Tab>
+    </TabBar>
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:MainPageView}"
+        Route="MainPage" />
+    <ShellContent
+        Title="Shopping List"
+        ContentTemplate="{DataTemplate views:ShoppingListView}"
+        Route="ShoppingList" />
+    <ShellContent
+        Title="Ingredient Inventory"
+        ContentTemplate="{DataTemplate views:IngredientInventoryView}"
+        Route="IngredientInventory" />
+
+
+</Shell>
