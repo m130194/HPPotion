@@ -13,6 +13,9 @@
         <Entry x:Name="EntryName" />
         <Button Text="Save" Command="{Binding ButtonSaveCommand}"/>
             <CollectionView x:Name="ListViewIngredients" ItemsSource="{Binding Inventory}">
+                <CollectionView.EmptyView>
+                    <Label Text="No saved inventory." />
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Ingredient">
                         <VerticalStackLayout>

@@ -1,15 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HarryPotterPotions.Models;
 using SQLite;
-using HarryPotterPotions.Models;
+using System;
+using System.Collections.Generic;
+using System.Security.AccessControl;
+using System.Text;
 
 namespace HarryPotterPotions.Services
 {
+    
     public class SQLService
     {
         //singleton should be here inside the class itself
         //static public SQLService Instance { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         SQLiteAsyncConnection _database;
 
