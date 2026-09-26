@@ -10,7 +10,7 @@ namespace HarryPotterPotions.ViewModels
 {
     public class IngredientInventoryViewModel
     {
-        public ObservableCollection<Ingredient> Inventory { get; } = new ObservableCollection<Ingredient>();
+        public ObservableCollection<Ingredient> Inventory { get; set; } = new ObservableCollection<Ingredient>();
 
         //static property referencing database
         //SQLService databaseService = App.DatabaseService;
@@ -65,7 +65,7 @@ namespace HarryPotterPotions.ViewModels
             Ingredient newIngredient = new()
             {
                 Name = "New Ingredient",
-                Quantity = 1,
+                Quantity = 2,
                 Measurement = "item",
             };
             int result = await databaseService.AddIngredientAsync(newIngredient);

@@ -12,6 +12,7 @@
         <Entry x:Name="EntryQuantity" />
         <Entry x:Name="EntryName" />
         <Button Text="Save" Command="{Binding ButtonSaveCommand}"/>
+        <Button Text="Refresh" Command="{Binding ButtonRefreshCommand}"/>
             <CollectionView x:Name="ListViewIngredients" ItemsSource="{Binding Inventory}">
                 <CollectionView.EmptyView>
                     <Label Text="No saved inventory." />
@@ -19,16 +20,13 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Ingredient">
                         <VerticalStackLayout>
+                            <Label Text="{Binding ID}"/>
                             <Label Text="{Binding Name}"/>
-                            <Entry Text="{Binding Quantity}"/>
-
+                            <Label Text="{Binding Quantity}"/>
                         </VerticalStackLayout>
-
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
-    </VerticalStackLayout>
+        </VerticalStackLayout>
         </ScrollView>
 </ContentPage>
