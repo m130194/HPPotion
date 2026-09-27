@@ -7,57 +7,61 @@ using System.Text;
 
 namespace HarryPotterPotions.Services
 {
-    
+
     public class SQLService
     {
-        //how do I implement this?
 
         private SQLService _databaseService;
-        private SQLiteAsyncConnection _database;
+        private SQLiteAsyncConnection _connection;
 
-        //constructor
-        public SQLService(string databasePath)
+
+        public async Task InitAsync()
         {
-
             if (_databaseService == null)
             {
-                //create database with provided location AppData folder in Windows. in mobile apps, the folder is protected within the app itself
-                _databaseService = new SQLService(
+                var databasePath =
                     Path.Combine(Environment.GetFolderPath(
                         Environment.SpecialFolder.LocalApplicationData), "ingredients.db"
-                    ));
+                    );
+
+                //pass in database path
+                _connection = new SQLiteAsyncConnection(databasePath);
+
+                //asynchronous set up database with generic type function inside constructor
+                _connection.CreateTableAsync<Ingredient>().Wait();
             }
-            //pass in database path
-            _database = new SQLiteAsyncConnection(databasePath);
-            //asynchronous set up database with generic type function inside constructor
-            _database.CreateTableAsync<Ingredient>().Wait();
-        } ⁠
+        }
 
         //Set up functionality - CRUD/BREAD operations
         public async Task<List<Ingredient>> BrowseIngredientsAsync()
         {
+            await InitAsync();
             //query table
-            return await _database.Table<Ingredient>().ToListAsync();
+            return await _connection.Table<Ingredient>().ToListAsync();
         }
 
         public async Task<int> AddIngredientAsync(Ingredient ingredient)
         {
-            return await _database.InsertAsync(ingredient);
+            await InitAsync();
+            return await _connection.InsertAsync(ingredient);
         }
 
         public async Task<int> EditIngredientAsync(Ingredient ingredient)
         {
-            return await _database.UpdateAsync(ingredient);
+            await InitAsync();
+            return await _connection.UpdateAsync(ingredient);
         }
 
         public async Task<int> DeleteIngredientAsync(Ingredient ingredient)
         {
-            return await _database.DeleteAsync(ingredient);
+            await InitAsync();
+            return await _connection.DeleteAsync(ingredient);
         }
 
         public async Task<Ingredient> ReadIngredientAsync(int id)
         {
-            return await _database.FindAsync<Ingredient>(id);
+            await InitAsync();
+            return await _connection.FindAsync<Ingredient>(id);
         }
 
     }

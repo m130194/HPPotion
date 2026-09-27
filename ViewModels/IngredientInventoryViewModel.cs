@@ -13,15 +13,15 @@ namespace HarryPotterPotions.ViewModels
     {
         public ObservableCollection<Ingredient> Inventory { get; set; } = new ObservableCollection<Ingredient>();
         
-        private readonly SQLService _service;
+        private readonly SQLService _sqlService;
 
         public ICommand ButtonRefreshCommand { get; private set; }
         public ICommand ButtonSaveCommand { get; private set; }
 
-        public IngredientInventoryViewModel(SQLService sqlService)
+        public IngredientInventoryViewModel(SQLService SqlService)
         {
             //this line needs to be looked at
-            _service = sqlService;
+            _sqlService = SqlService;
 
             ////initialize the command property in the constructor
             ButtonRefreshCommand = new Command(async () => await SeeIngredientsAsync());
@@ -32,7 +32,7 @@ namespace HarryPotterPotions.ViewModels
         public async Task SeeIngredientsAsync()
         {
             //Inventory.Clear();
-            var ingredients = await _service.BrowseIngredientsAsync();
+            var ingredients = await _sqlService.BrowseIngredientsAsync();
             foreach (var ingredient in ingredients)
             {
                 Inventory.Add(ingredient);
@@ -46,7 +46,7 @@ namespace HarryPotterPotions.ViewModels
                 Quantity = 2,
                 Measurement = "item",
             };
-            int result = await _service.AddIngredientAsync(newIngredient);
+            int result = await _sqlService.AddIngredientAsync(newIngredient);
             //if (result == 1)
             //{
             //    await SeeIngredientsAsync();
