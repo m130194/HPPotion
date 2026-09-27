@@ -8,42 +8,20 @@ using System.Windows.Input;
 
 namespace HarryPotterPotions.ViewModels
 {
+    
     public class IngredientInventoryViewModel
     {
         public ObservableCollection<Ingredient> Inventory { get; set; } = new ObservableCollection<Ingredient>();
+        
+        private readonly SQLService _service;
 
-        //static property referencing database
-        //SQLService databaseService = App.DatabaseService;
-
-        //static is accessible from the class level without instantiating
-        private static SQLService databaseService = default!;
-
-        public static SQLService DatabaseService
-        {
-            get
-            {
-                if (databaseService == null)
-                {
-                    //create database with provided location AppData folder in Windows. in mobile apps, the folder is protected within the app itself
-                    databaseService = new SQLService(
-                        Path.Combine(Environment.GetFolderPath(
-                            Environment.SpecialFolder.LocalApplicationData), "ingredients.db"
-                        ));
-                }
-                return databaseService;
-            }
-            set { databaseService = value; }
-        }
-
-
-        ////declare the public ICommand property
         public ICommand ButtonRefreshCommand { get; private set; }
         public ICommand ButtonSaveCommand { get; private set; }
 
-        public IngredientInventoryViewModel()
+        public IngredientInventoryViewModel(SQLService sqlService)
         {
             //this line needs to be looked at
-            databaseService = DatabaseService;
+            _service = sqlService;
 
             ////initialize the command property in the constructor
             ButtonRefreshCommand = new Command(async () => await SeeIngredientsAsync());
@@ -54,7 +32,7 @@ namespace HarryPotterPotions.ViewModels
         public async Task SeeIngredientsAsync()
         {
             //Inventory.Clear();
-            var ingredients = await databaseService.BrowseIngredientsAsync();
+            var ingredients = await _service.BrowseIngredientsAsync();
             foreach (var ingredient in ingredients)
             {
                 Inventory.Add(ingredient);
@@ -68,7 +46,7 @@ namespace HarryPotterPotions.ViewModels
                 Quantity = 2,
                 Measurement = "item",
             };
-            int result = await databaseService.AddIngredientAsync(newIngredient);
+            int result = await _service.AddIngredientAsync(newIngredient);
             //if (result == 1)
             //{
             //    await SeeIngredientsAsync();
