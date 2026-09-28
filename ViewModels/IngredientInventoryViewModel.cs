@@ -23,6 +23,8 @@ namespace HarryPotterPotions.ViewModels
             //this line needs to be looked at
             _sqlService = SqlService;
 
+            SeeIngredientsAsync();
+
             ////initialize the command property in the constructor
             ButtonRefreshCommand = new Command(async () => await SeeIngredientsAsync());
             ////ButtonRefreshCommand.CanExecute
@@ -31,7 +33,7 @@ namespace HarryPotterPotions.ViewModels
 
         public async Task SeeIngredientsAsync()
         {
-            //Inventory.Clear();
+            Inventory.Clear();
             var ingredients = await _sqlService.BrowseIngredientsAsync();
             foreach (var ingredient in ingredients)
             {
@@ -46,11 +48,13 @@ namespace HarryPotterPotions.ViewModels
                 Quantity = 2,
                 Measurement = "item",
             };
+            Inventory.Add(newIngredient);
             int result = await _sqlService.AddIngredientAsync(newIngredient);
-            //if (result == 1)
-            //{
-            //    await SeeIngredientsAsync();
-            //}
+            if (result != 1)
+            {
+                Inventory.Remove(newIngredient);
+                //add some error handling here, maybe a message box to the user
+            }
         }
 
 
