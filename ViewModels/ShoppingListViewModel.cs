@@ -20,5 +20,8 @@ namespace HarryPotterPotions.ViewModels
         {
             _ingredientRepository = ingredientRepository;
         }
+
+        public ObservableCollection<string> ShoppingList =>
+            _ingredientRepository.GetIngredientsForShoppingList();
     }
 }
