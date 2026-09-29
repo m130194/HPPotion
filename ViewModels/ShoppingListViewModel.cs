@@ -16,12 +16,14 @@ namespace HarryPotterPotions.ViewModels
         public ObservableCollection<ActualPotion> SavedPotions =>
             _ingredientRepository.SavedPotions;
 
+        public ObservableCollection<string> ShoppingList =>
+            _ingredientRepository.Ingredients;
+
         public ShoppingListViewModel(IngredientRepository ingredientRepository)
         {
             _ingredientRepository = ingredientRepository;
         }
 
-        public ObservableCollection<string> ShoppingList =>
-            _ingredientRepository.GetIngredientsForShoppingList();
+        
     }
 }

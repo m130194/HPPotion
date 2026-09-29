@@ -26,15 +26,15 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         
-        <CollectionView ItemsSource="{Binding ShoppingList}">
+        <CollectionView ItemsSource="{Binding ShoppingList}" x:Name="ShoppingList">
             <CollectionView.EmptyView>
                 <Label Text="No items in shopping list." />
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="x:String">
                     <VerticalStackLayout>
                         
-                        <Label Text="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ShoppingList}" />
+                        <Label Text="{Binding .}"/>
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

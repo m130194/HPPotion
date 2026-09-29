@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
+
 namespace HarryPotterPotions.Services
 {
     public class IngredientRepository
@@ -11,19 +12,22 @@ namespace HarryPotterPotions.Services
 
         public ObservableCollection<ActualPotion> SavedPotions { get; } = new();
 
-        public ObservableCollection<string> GetIngredientsForShoppingList()
+        private ObservableCollection<string> _ingredients;
+        public ObservableCollection<string> Ingredients
         {
-            var shoppingList = new ObservableCollection<string>();
-            foreach (var potion in SavedPotions)
+            get
             {
-                shoppingList.Add(potion.Ingredients);
-                //foreach (var ingredient in potion.Ingredients)
-                //{
-                //    // Add ingredient to shopping list
-                //    shoppingList.Add(ingredient.Name);
-                //}
+                var shoppingList = new ObservableCollection<string>();
+                foreach (ActualPotion potion in SavedPotions)
+                {
+                    string ingredientString = potion.Ingredients;
+                    shoppingList = new ObservableCollection<string>(ingredientString.Split(',').Select(item => item.Trim()).Where(item => !string.IsNullOrEmpty(item)));
+                }
+                return shoppingList;
             }
-            return shoppingList;
         }
-}
+
+
+            
+        }
 }
