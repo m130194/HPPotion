@@ -2,11 +2,11 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-//using System.Text.Json;
-
+using System.Text.Json;
 using System.Net.Http;
 using System.Text;
 using HarryPotterPotions.Models;
+using System.Text.Json.Nodes;
 
 namespace HarryPotterPotions.Services
 {
@@ -38,10 +38,7 @@ namespace HarryPotterPotions.Services
 
             List<Potion> potions = result!.data;
 
-
-            //List<Potion> potions = JsonConvert.DeserializeObject<List<Potion>>(contentString) ?? [];
-
-            return potions.ConvertAll<ActualPotion>(x=>x);
+            return potions.ConvertAll<ActualPotion>(x => x);
 
         }
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HarryPotterPotions.ViewModels
@@ -17,18 +18,22 @@ namespace HarryPotterPotions.ViewModels
 
         public ICommand ButtonRefreshCommand { get; private set; }
         public ICommand ButtonSaveCommand { get; private set; }
+        public ICommand ButtonDeleteCommand { get; private set; }
 
         public IngredientInventoryViewModel(SQLService SqlService)
         {
-            //this line needs to be looked at
+            
             _sqlService = SqlService;
 
-            SeeIngredientsAsync();
+            // this line needs to be looked at
+            _ = SeeIngredientsAsync();
 
             ////initialize the command property in the constructor
             ButtonRefreshCommand = new Command(async () => await SeeIngredientsAsync());
             ////ButtonRefreshCommand.CanExecute
             ButtonSaveCommand = new Command(async () => await SaveIngredientAsync());
+
+            ButtonDeleteCommand = new Command<Ingredient>(async (ingredient) => await RemoveIngredientAsync(ingredient));
         }
 
         public async Task SeeIngredientsAsync()
@@ -57,6 +62,17 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
+        public async Task RemoveIngredientAsync(Ingredient ingredient)
+        {
+            if (ingredient == null)
+                return;
+
+            int result = await _sqlService.DeleteIngredientAsync(ingredient);
+            if (result == 1)
+            {
+                Inventory.Remove(ingredient);
+            }
+        }
 
     }
 }

@@ -53,10 +53,6 @@ namespace HarryPotterPotions.Models
         public object time { get; set; }
         public string wiki { get; set; }
 
-        public override string ToString()
-        {
-            return $"Potion: {name}";
-        }
     }
 
     public class Links

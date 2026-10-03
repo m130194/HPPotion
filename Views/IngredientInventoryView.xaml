@@ -6,6 +6,7 @@
              x:DataType="viewmodel:IngredientInventoryViewModel"
              
              x:Class="HarryPotterPotions.Views.IngredientInventoryView"
+             x:Name="IngredientInventoryPage"
              Title="IngredientInventoryView">
     <ScrollView>
         <VerticalStackLayout>
@@ -19,11 +20,12 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Ingredient">
-                        <VerticalStackLayout>
+                        <HorizontalStackLayout>
                             <Label Text="{Binding ID}"/>
                             <Label Text="{Binding Name}"/>
                             <Label Text="{Binding Quantity}"/>
-                        </VerticalStackLayout>
+                            <Button Text="Delete" Command="{Binding Source={x:Reference IngredientInventoryPage}, Path=BindingContext.ButtonDeleteCommand}" CommandParameter="{Binding .}"/>
+                        </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

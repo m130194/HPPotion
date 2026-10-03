@@ -10,35 +10,44 @@
     <VerticalStackLayout>
 
 
-            <CollectionView ItemsSource="{Binding SavedPotions}" x:Name="SavedPotionsList">
-                <CollectionView.EmptyView>
-                    <Label Text="No saved potions." />
-                </CollectionView.EmptyView>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Potion">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" />
+        <CollectionView ItemsSource="{Binding SavedPotions}">
+            <CollectionView.EmptyView>
+                <Label Text="No saved potions." />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Potion">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Name}" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-                            <Label Text="{Binding Ingredients}" />
-
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        
-        <CollectionView ItemsSource="{Binding ShoppingList}" x:Name="ShoppingList">
+        <CollectionView ItemsSource="{Binding ShoppingList}">
             <CollectionView.EmptyView>
                 <Label Text="No items in shopping list." />
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="x:String">
-                    <VerticalStackLayout>
-                        
-                        <Label Text="{Binding .}"/>
-                    </VerticalStackLayout>
+                    <!--<SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.SwipeButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        </SwipeView>-->
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding .}" FontSize="20" VerticalOptions="Center" />
+                        <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                        <Button Text="Add to Inventory" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
+
+                    </HorizontalStackLayout>
+
+
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-            </CollectionView>
+        </CollectionView>
 
 
     </VerticalStackLayout>

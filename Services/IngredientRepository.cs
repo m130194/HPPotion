@@ -9,25 +9,11 @@ namespace HarryPotterPotions.Services
 {
     public class IngredientRepository
     {
-
-        public ObservableCollection<ActualPotion> SavedPotions { get; } = new();
-
-        private ObservableCollection<string> _ingredients;
-        public ObservableCollection<string> Ingredients
-        {
-            get
-            {
-                var shoppingList = new ObservableCollection<string>();
-                foreach (ActualPotion potion in SavedPotions)
-                {
-                    string ingredientString = potion.Ingredients;
-                    shoppingList = new ObservableCollection<string>(ingredientString.Split(',').Select(item => item.Trim()).Where(item => !string.IsNullOrEmpty(item)));
-                }
-                return shoppingList;
-            }
-        }
+        /// <summary>
+        /// Gets the collection of saved potions that the user wants to make. This collection is used to generate the shopping list of ingredients needed for those potions.
+        /// </summary>
+        public ObservableCollection<ActualPotion> SavedPotionsToMake { get; } = new();
 
 
-            
-        }
+    }
 }

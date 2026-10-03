@@ -9,15 +9,10 @@ namespace HarryPotterPotions.Views
     {
         List<ActualPotion> potions;
 
-        //public ObservableCollection<Potion> savedPotions { get; }
-        //    = new ObservableCollection<Potion>();
-
-
         public MainPageView(PotionsViewModel vm)
         {
             InitializeComponent();
             BindingContext = vm;
-            //SavedPotionsList.BindingContext = HarryPotterPotions.ViewModels.PotionsViewModel.SavedPotions;
 
         }
 
@@ -28,23 +23,18 @@ namespace HarryPotterPotions.Views
             PotionsListView.ItemsSource = potions;
         }
 
-        //public void AddPotion(Potion newPotion)
-        //{
-        //    savedPotions.Add(newPotion);
-        //}
 
         private void OnAddPotionClicked(object sender, EventArgs e)
         {
             var viewModel = BindingContext as PotionsViewModel;
             ActualPotion? selected = PotionsListView.SelectedItem as ActualPotion;
             viewModel?.AddPotion(selected);
-            //PotionsListView
         }
 
         private async void OnGoToShoppingListClicked(object sender, EventArgs e)
         {
             //Navigation.PushAsync(new ShoppingListView());
-            await Shell.Current.GoToAsync(nameof(IngredientInventoryView));
+            await Shell.Current.GoToAsync(nameof(ShoppingListView));
             //Shell.Current.GoToAsync("ShoppingList");
 
         }

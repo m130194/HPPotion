@@ -16,7 +16,7 @@
 
             
 
-            <CollectionView x:Name="PotionsListView"
+            <CollectionView x:Name="PotionsListView" 
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

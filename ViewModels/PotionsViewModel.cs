@@ -18,7 +18,7 @@ namespace HarryPotterPotions.ViewModels
         private readonly IngredientRepository _ingredientRepository;
 
         public ObservableCollection<ActualPotion> SavedPotions =>
-            _ingredientRepository.SavedPotions;
+            _ingredientRepository.SavedPotionsToMake;
 
         public PotionsViewModel(IngredientRepository ingredientRepository)
         {
