@@ -29,17 +29,49 @@ namespace HarryPotterPotions.Services
 
             string contentString = await response.Content.ReadAsStringAsync();
 
-            var result = JsonConvert.DeserializeAnonymousType(
-                contentString,
-                new
+            //var result = JsonConvert.DeserializeAnonymousType(
+            //    contentString,
+            //    new
+            //    {
+            //        data = new List<Potion>()
+            //    });
+
+            //List<Potion> potions = result!.data;
+
+            //return potions.ConvertAll<ActualPotion>(x => x);
+            
+            JsonNode forecastNode = JsonNode.Parse(contentString);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                WriteIndented = true
+            };
+
+            JsonNode data = forecastNode!["data"];
+
+            JsonArray potionsData = data.AsArray();
+
+            List<ActualPotion> potions = new();
+
+            foreach (JsonNode? potionData in potionsData)
+            {
+                string Id = potionData?["id"].ToString();
+                string Name = potionData?["attributes"]["name"]?.ToString();
+                string Ingredients = potionData?["attributes"]["ingredients"]?.ToString();
+
+                ActualPotion potion = new ActualPotion
                 {
-                    data = new List<Potion>()
-                });
+                    Id = Id,
+                    Name = Name,
+                    Ingredients = Ingredients
+                };
+                potions.Add(potion);
 
-            List<Potion> potions = result!.data;
 
-            return potions.ConvertAll<ActualPotion>(x => x);
-
+            }
+            
+            return potions;
         }
     }
 }

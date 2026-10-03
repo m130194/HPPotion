@@ -29,19 +29,25 @@
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="x:String">
-                    <!--<SwipeView>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
                         <SwipeView.RightItems>
                             <SwipeItems>
-                                <SwipeItem Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.SwipeButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                                <SwipeItem Text="Add to Inventory" BackgroundColor="Purple" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
                             </SwipeItems>
                         </SwipeView.RightItems>
-                        </SwipeView>-->
+                    
                     <HorizontalStackLayout>
-                        <Label Text="{Binding .}" FontSize="20" VerticalOptions="Center" />
-                        <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
-                        <Button Text="Add to Inventory" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
+                        <Label Text="{Binding .}" FontSize="30" VerticalOptions="Center" />
+                        <!--<Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                            <Button Text="Add to Inventory" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />-->
 
-                    </HorizontalStackLayout>
+                        </HorizontalStackLayout>
+                    </SwipeView>
 
 
 

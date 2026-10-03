@@ -11,9 +11,9 @@ namespace HarryPotterPotions.Models
 {
     public class ActualPotion : INotifyPropertyChanged
     {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public string Ingredients { get; set; }
+        public string Id { get; set; } = String.Empty;
+        public string Name { get; set; } = String.Empty;
+        public string Ingredients { get; set; } = String.Empty;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -23,7 +23,7 @@ namespace HarryPotterPotions.Models
             {
                 Name = fromTheInternet.attributes.name,
                 Ingredients = fromTheInternet.attributes.ingredients,
-                ID = fromTheInternet.id
+                Id = fromTheInternet.id
             };
         }
 
