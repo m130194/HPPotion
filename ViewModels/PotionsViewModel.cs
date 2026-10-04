@@ -19,37 +19,40 @@ namespace HarryPotterPotions.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(searchParam));
         }
 
-        string searchParam;
+        private string _searchParam;
 
         public string SearchParam
         {
-            get => searchParam;
+            get => _searchParam;
             set
 
                 {
-                    searchParam = value;
+                    _searchParam = value;
                     OnPropertyChanged(nameof(SearchParam));
                 }
             
         }
+
+        ActualPotion _selectedPotion;
+
         private readonly APIService _apiService;
         private readonly IngredientRepository _ingredientRepository;
 
-        public ObservableCollection<ActualPotion> SavedPotions =>
+        public ObservableCollection<ActualPotion> SavedPotionsToMake =>
             _ingredientRepository.SavedPotionsToMake;
         public ObservableCollection<ActualPotion> PotionSearchResults { get; set; } = new();
-        public Command<string> ButtonSearchCommand { get; private set; }
+        public Command ButtonSearchCommand { get; private set; }
         public Command<ActualPotion> ButtonAddPotionCommand { get; private set; }
 
         public PotionsViewModel(APIService apiService, IngredientRepository ingredientRepository)
         {
             _apiService = apiService;
             _ingredientRepository = ingredientRepository;
-            ButtonSearchCommand = new Command<string>(async (SearchParam) => await SearchPotionsAsync(SearchParam));
+            ButtonSearchCommand = new Command(async () => await SearchPotionsAsync());
             ButtonAddPotionCommand = new Command<ActualPotion>(AddPotion);
         }
 
-        public async Task SearchPotionsAsync(string SearchParam)
+        public async Task SearchPotionsAsync()
         {
             PotionSearchResults.Clear();
             var potions = await _apiService.GetPotionsAsync(SearchParam);
@@ -59,8 +62,8 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
-        public void AddPotion(ActualPotion newPotion) {
-            SavedPotions.Add(newPotion);
+        public void AddPotion(_selectedPotion) {
+            SavedPotionsToMake.Add(_selectedPotion);
         }
 
         

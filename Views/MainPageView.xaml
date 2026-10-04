@@ -10,14 +10,12 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Entry x:Name="NameSearch" Text="{Binding Source={x:Reference MainPage}, Path=BindingContext.SearchParam}" />
+            <Entry Text="{Binding Source={x:Reference MainPage}, Path=BindingContext.SearchParam}" />
 
             <Button x:Name="ButtonSearch" Text="Search" Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.ButtonSearchCommand}" />
 
-
-
-            <CollectionView x:Name="PotionsListView" 
-                SelectionMode="Single" ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.PotionSearchResults}">
+            <CollectionView ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.PotionSearchResults}"
+                SelectionMode="Single" SelectedItem="{Binding Source={x:Reference MainPage}, Path=BindingContext._selectedPotion, Mode=OneWay}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>
@@ -32,7 +30,7 @@
 
             <Button Text="Add Potion to Saved Potions" Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.ButtonAddPotionCommand}" />
 
-            <CollectionView ItemsSource="{Binding SavedPotions}" x:Name="SavedPotionsList">
+            <CollectionView ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.SavedPotionsToMake}">
                 <CollectionView.EmptyView>
                     <Label Text="No saved potions." />
                 </CollectionView.EmptyView>
@@ -40,9 +38,6 @@
                     <DataTemplate>
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}" />
-
-
-
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
