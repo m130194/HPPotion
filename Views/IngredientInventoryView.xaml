@@ -30,22 +30,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <CollectionView>
-                <CollectionView.ItemsSource>
-                    <x:Array Type="{x:Type models:Ingredient}">
-                        <models:Ingredient Name="Veritaserum" Quantity="5" />
-                        <models:Ingredient Name="Wolfsbane" Quantity="10" />
-                    </x:Array>
-                </CollectionView.ItemsSource>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Ingredient">
-                        <HorizontalStackLayout Padding="10" Spacing="10">
-                            <Label Text="{Binding Name}" FontSize="20"/>
-                            <Label Text="{Binding Quantity}" />
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
         </VerticalStackLayout>
         </ScrollView>
 </ContentPage>

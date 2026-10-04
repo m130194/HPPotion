@@ -5,32 +5,32 @@
              x:Name="MainPage"
              x:Class="HarryPotterPotions.Views.MainPageView"
              Title="Search Potions">
-            
+
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Entry x:Name="NameSearch"></Entry>
+            <Entry x:Name="NameSearch" Text="{Binding Source={x:Reference MainPage}, Path=BindingContext.SearchParam}" />
 
-            <Button x:Name="ButtonSearch" Text="Search" Clicked="OnButtonClicked" />
+            <Button x:Name="ButtonSearch" Text="Search" Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.ButtonSearchCommand}" />
 
-            
+
 
             <CollectionView x:Name="PotionsListView" 
-                SelectionMode="Single">
+                SelectionMode="Single" ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.PotionSearchResults}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}" />
-                            
+
                             <Label Text="{Binding Ingredients}" />
-                            
+
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Add Potion to Saved Potions" Clicked="OnAddPotionClicked" />
+            <Button Text="Add Potion to Saved Potions" Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.ButtonAddPotionCommand}" />
 
             <CollectionView ItemsSource="{Binding SavedPotions}" x:Name="SavedPotionsList">
                 <CollectionView.EmptyView>
@@ -41,7 +41,7 @@
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}" />
 
-                            
+
 
                         </VerticalStackLayout>
                     </DataTemplate>

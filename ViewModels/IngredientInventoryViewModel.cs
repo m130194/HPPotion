@@ -16,9 +16,9 @@ namespace HarryPotterPotions.ViewModels
         
         private readonly SQLService _sqlService;
 
-        public ICommand ButtonRefreshCommand { get; private set; }
-        public ICommand ButtonSaveCommand { get; private set; }
-        public ICommand ButtonDeleteCommand { get; private set; }
+        public Command ButtonRefreshCommand { get; private set; }
+        public Command ButtonSaveCommand { get; private set; }
+        public Command ButtonDeleteCommand { get; private set; }
 
         public IngredientInventoryViewModel(SQLService SqlService)
         {

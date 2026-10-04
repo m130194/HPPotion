@@ -15,9 +15,9 @@ namespace HarryPotterPotions.Services
         HttpClient _client = new HttpClient();
         const string baseURL = "https://api.potterdb.com/";
 
-        public async Task<List<ActualPotion>> GetPotionsAsync(string searchParam)
+        public async Task<List<ActualPotion>> GetPotionsAsync(string SearchParam)
         {
-            string apiURL = $"{baseURL}v1/potions?filter[name_cont]={searchParam}";
+            string apiURL = $"{baseURL}v1/potions?filter[name_cont]={SearchParam}";
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, apiURL);
 
             HttpResponseMessage response = await _client.SendAsync(request);

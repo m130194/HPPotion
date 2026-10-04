@@ -40,7 +40,7 @@
                                 <SwipeItem Text="Add to Inventory" BackgroundColor="Purple" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
                             </SwipeItems>
                         </SwipeView.RightItems>
-                    
+                    <!--</SwipeView>-->
                     <HorizontalStackLayout>
                         <Label Text="{Binding .}" FontSize="30" VerticalOptions="Center" />
                         <!--<Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
