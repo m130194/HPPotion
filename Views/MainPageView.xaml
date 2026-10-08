@@ -2,40 +2,54 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Models="clr-namespace:HarryPotterPotions.Models"
+             xmlns:ViewModels="clr-namespace:HarryPotterPotions.ViewModels"
              x:Name="MainPage"
              x:Class="HarryPotterPotions.Views.MainPageView"
+             x:DataType="ViewModels:PotionsViewModel"
              Title="Search Potions">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Entry Text="{Binding Source={x:Reference MainPage}, Path=BindingContext.SearchParam}" />
+            <Entry Text="{Binding SearchParam}" />
 
-            <Button x:Name="ButtonSearch" Text="Search" Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.ButtonSearchCommand}" />
+            <Button x:Name="ButtonSearch" Text="Search" Command="{Binding ButtonSearchCommand}" />
 
-            <CollectionView ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.PotionSearchResults}"
-                SelectionMode="Single" SelectedItem="{Binding Source={x:Reference MainPage}, Path=BindingContext._selectedPotion, Mode=OneWay}">
+            <CollectionView ItemsSource="{Binding PotionSearchResults}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" />
+                    <DataTemplate x:DataType="Models:ActualPotion">
+                        <HorizontalStackLayout>
+                            <Label
+                                Text="{Binding Name}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.TapAddPotionCommand}"
+                                                          CommandParameter="{Binding .}"
+                                      NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
 
-                            <Label Text="{Binding Ingredients}" />
 
-                        </VerticalStackLayout>
+                            <!--<Button
+                                Text="Select"
+                                Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.SetSelectedPotionCommand}"
+                                CommandParameter="{Binding .}" />-->
+
+                            <!--<Label Text="{Binding Ingredients}" />-->
+
+                        </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Add Potion to Saved Potions" Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.ButtonAddPotionCommand}" />
+            <Button Text="Add Potion to Saved Potions" Command="{Binding ButtonAddPotionCommand}" />
 
-            <CollectionView ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.SavedPotionsToMake}">
+            <CollectionView ItemsSource="{Binding SavedPotionsToMake}">
                 <CollectionView.EmptyView>
                     <Label Text="No saved potions." />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="Models:ActualPotion">
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}" />
                         </VerticalStackLayout>

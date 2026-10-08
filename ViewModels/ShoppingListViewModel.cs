@@ -14,13 +14,10 @@ namespace HarryPotterPotions.ViewModels
     {
 
         private readonly SQLService _sqlService;
-        private readonly IngredientRepository _ingredientRepository;
+        private readonly Repository _repository;
 
         public ObservableCollection<ActualPotion> SavedPotionsToMake =>
-            _ingredientRepository.SavedPotionsToMake;
-
-        //public ObservableCollection<string> ShoppingList =>
-        //    _ingredientRepository.ShoppingList;
+            _repository.SavedPotionsToMake;
 
         
         public Command ButtonDeleteIngredientCommand { get; private set; }
@@ -28,11 +25,11 @@ namespace HarryPotterPotions.ViewModels
         
 
 
-        public ShoppingListViewModel(SQLService SqlService, IngredientRepository ingredientRepository)
+        public ShoppingListViewModel(SQLService SqlService, Repository repository)
         {
-            _ingredientRepository = ingredientRepository;
+            _repository = repository;
             _sqlService = SqlService;
-            AddIngredientsFromAllSavedPotion(_ingredientRepository.SavedPotionsToMake);
+            AddIngredientsFromAllSavedPotion(_repository.SavedPotionsToMake);
             ButtonDeleteIngredientCommand = new Command<string>(RemoveIngredient);
             ButtonAddIngredientToInventoryCommand = new Command<string>(async (ingredient) => await AddIngredientToInventoryAsync(ingredient));
         }
@@ -103,14 +100,13 @@ namespace HarryPotterPotions.ViewModels
                     Quantity = 1,
                     Measurement = "item"
                 };
-                //how to access Inventory observable collection from here?
-                //Inventory.Add(newIngredient);
+                //TODO: Add error handling
                 int result = await _sqlService.AddIngredientAsync(newIngredient);
-                //if (result != 1)
-                //{
-                //    Inventory.Remove(newIngredient);
-                //    //add some error handling here, maybe a message box to the user
-                //}
+                //access Inventory observable collection from here?
+                _repository.AddIngredientToIngredientInventory(newIngredient);
+                
+
+
             }
 
             

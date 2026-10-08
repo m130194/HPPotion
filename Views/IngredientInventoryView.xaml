@@ -10,10 +10,11 @@
              Title="IngredientInventoryView">
     <ScrollView>
         <VerticalStackLayout>
-        <Entry x:Name="EntryQuantity" />
-        <Entry x:Name="EntryName" />
-        <Button Text="Save" Command="{Binding ButtonSaveCommand}"/>
-        <Button Text="Refresh" Command="{Binding ButtonRefreshCommand}"/>
+            <Entry x:Name="EntryQuantity" />
+            <Entry x:Name="EntryName" />
+            <Button Text="Save" Command="{Binding ButtonSaveCommand}"/>
+            <Button Text="Refresh" Command="{Binding ButtonRefreshCommand}"/>
+            
             <CollectionView ItemsSource="{Binding Inventory}">
                 <CollectionView.EmptyView>
                     <Label Text="No saved inventory." />
@@ -31,5 +32,5 @@
             </CollectionView>
 
         </VerticalStackLayout>
-        </ScrollView>
+    </ScrollView>
 </ContentPage>

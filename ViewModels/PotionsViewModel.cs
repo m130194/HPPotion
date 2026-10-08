@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
+
 
 
 namespace HarryPotterPotions.ViewModels
@@ -33,23 +35,26 @@ namespace HarryPotterPotions.ViewModels
             
         }
 
-        ActualPotion _selectedPotion;
+        //private ActualPotion _selectedPotion;
 
         private readonly APIService _apiService;
-        private readonly IngredientRepository _ingredientRepository;
+        private readonly Repository _repository;
 
         public ObservableCollection<ActualPotion> SavedPotionsToMake =>
-            _ingredientRepository.SavedPotionsToMake;
+            _repository.SavedPotionsToMake;
         public ObservableCollection<ActualPotion> PotionSearchResults { get; set; } = new();
         public Command ButtonSearchCommand { get; private set; }
-        public Command<ActualPotion> ButtonAddPotionCommand { get; private set; }
+        public Command TapAddPotionCommand { get; private set; }
 
-        public PotionsViewModel(APIService apiService, IngredientRepository ingredientRepository)
+        public Command<ActualPotion> SetSelectedPotionCommand { get; private set; }
+
+        public PotionsViewModel(APIService apiService, Repository repository)
         {
             _apiService = apiService;
-            _ingredientRepository = ingredientRepository;
+            _repository = repository;
             ButtonSearchCommand = new Command(async () => await SearchPotionsAsync());
-            ButtonAddPotionCommand = new Command<ActualPotion>(AddPotion);
+            TapAddPotionCommand = new Command<ActualPotion>((selectedPotion) => AddPotion(selectedPotion));
+            //SetSelectedPotionCommand = new Command<ActualPotion>((selectedPotion) => SetSelectedPotion(selectedPotion));
         }
 
         public async Task SearchPotionsAsync()
@@ -62,14 +67,25 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
-        public void AddPotion(_selectedPotion) {
-            SavedPotionsToMake.Add(_selectedPotion);
+        //public void SetSelectedPotion(ActualPotion selectedPotion)
+        //{
+        //    _selectedPotion = selectedPotion;
+        //}
+
+        public void AddPotion(ActualPotion selectedPotion) 
+        {
+            if (selectedPotion != null)
+            {
+                //_repository.AddPotionToSavedPotionsToMake(_selectedPotion);
+                SavedPotionsToMake.Add(selectedPotion);
+            }
         }
 
-        
 
-            
-        
+
+
+        //Binding code ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.PotionSearchResults}   
+        //SelectionMode="Single" SelectedItem="{Binding _selectedPotion}"
 
     }
 }

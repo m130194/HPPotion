@@ -12,18 +12,20 @@ namespace HarryPotterPotions.ViewModels
     
     public class IngredientInventoryViewModel
     {
-        public ObservableCollection<Ingredient> Inventory { get; set; } = new ObservableCollection<Ingredient>();
         
-        private readonly SQLService _sqlService;
 
+        private readonly SQLService _sqlService;
+        private readonly Repository _repository;
+        public ObservableCollection<Ingredient> Inventory => _repository.Inventory;
         public Command ButtonRefreshCommand { get; private set; }
         public Command ButtonSaveCommand { get; private set; }
         public Command ButtonDeleteCommand { get; private set; }
 
-        public IngredientInventoryViewModel(SQLService SqlService)
+        public IngredientInventoryViewModel(SQLService SqlService, Repository repository)
         {
             
             _sqlService = SqlService;
+            _repository = repository;
 
             // this line needs to be looked at
             _ = SeeIngredientsAsync();
@@ -45,6 +47,7 @@ namespace HarryPotterPotions.ViewModels
                 Inventory.Add(ingredient);
             }
         }
+        //TODO: Add a method to save a new ingredient to the database and update the Inventory collection
         public async Task SaveIngredientAsync()
         {
             Ingredient newIngredient = new()
