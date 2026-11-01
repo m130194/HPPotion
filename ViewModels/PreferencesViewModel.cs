@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using System.Text;
+using HarryPotterPotions.Services;
 
 namespace HarryPotterPotions.ViewModels
 {
@@ -15,9 +16,15 @@ namespace HarryPotterPotions.ViewModels
         public PreferencesViewModel(PreferencesService prefsService)
         {
             _prefsService = prefsService;
-            // will add something here soon
+            _prefsService.PreferenceChanged += OnPreferenceChanged;
         }
 
-        // will add something more here soon
+        private void OnPreferenceChanged(object sender, string key)
+        {
+            if (key == "MyTargetKey")
+            {
+                // Refresh properties
+            }
+        }
     }
 }

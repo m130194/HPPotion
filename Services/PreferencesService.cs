@@ -9,6 +9,15 @@ namespace HarryPotterPotions.Services
     {
         public event EventHandler<string> PreferenceChanged;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public void SetPreference(string key, int value)
+        {
+            Preferences.Default.Set(key, value);
+            PreferenceChanged?.Invoke(this, key);
+        }
+
+        public int GetPreference(string key, int defaultValue)
+        {
+            return Preferences.Default.Get(key, defaultValue);
+        }
     }
 }
