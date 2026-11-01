@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Models="clr-namespace:HarryPotterPotions.Models"
              xmlns:ViewModels="clr-namespace:HarryPotterPotions.ViewModels"
-             x:Name="MainPage"
-             x:Class="HarryPotterPotions.Views.MainPageView"
+             x:Name="ThisMainPage"
+             x:Class="HarryPotterPotions.Views.MainPage"
              x:DataType="ViewModels:PotionsViewModel"
              Title="Search Potions">
 
@@ -18,12 +18,12 @@
 
             <CollectionView ItemsSource="{Binding PotionSearchResults}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="Models:ActualPotion">
+                    <DataTemplate x:DataType="Models:Potion">
                         <HorizontalStackLayout>
                             <Label
                                 Text="{Binding Name}">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference MainPage}, Path=BindingContext.TapAddPotionCommand}"
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ThisMainPage}, Path=BindingContext.TapAddPotionCommand}"
                                                           CommandParameter="{Binding .}"
                                       NumberOfTapsRequired="1" />
                                 </Label.GestureRecognizers>
@@ -49,7 +49,7 @@
                     <Label Text="No saved potions." />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="Models:ActualPotion">
+                    <DataTemplate x:DataType="Models:Potion">
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}" />
                         </VerticalStackLayout>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HarryPotterPotions.Views.ShoppingListView"
+             x:Class="HarryPotterPotions.Views.ShoppingListPage"
              xmlns:viewmodel="clr-namespace:HarryPotterPotions.ViewModels"
              xmlns:model="clr-namespace:HarryPotterPotions.Models"
              x:DataType="viewmodel:ShoppingListViewModel"
-             x:Name="WhatsThisShoppingListPage"
+             x:Name="ThisShoppingListPage"
              Title="Shopping List">
     <VerticalStackLayout>
 
@@ -41,10 +41,10 @@
                             </SwipeItems>
                         </SwipeView.RightItems>
                     </SwipeView>-->
-                    <HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="20">
                         <Label Text="{Binding .}" FontSize="30" VerticalOptions="Center" />
-                        <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
-                        <Button Text="Add to Inventory" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
+                        <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                        <Button Text="Add to Inventory" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
 
                     </HorizontalStackLayout>
                     <!--</SwipeView>-->

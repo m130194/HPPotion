@@ -3,10 +3,10 @@ using HarryPotterPotions.Services;
 using HarryPotterPotions.Models;
 using HarryPotterPotions.ViewModels;
 
-public partial class IngredientInventoryView : ContentPage
+public partial class IngredientInventoryPage : ContentPage
 {
 
-    public IngredientInventoryView(IngredientInventoryViewModel vm)
+    public IngredientInventoryPage(IngredientInventoryViewModel vm)
 	{
 		InitializeComponent();
         BindingContext = vm;

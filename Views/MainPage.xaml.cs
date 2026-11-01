@@ -5,11 +5,11 @@ using HarryPotterPotions.ViewModels;
 
 namespace HarryPotterPotions.Views
 {
-    public partial class MainPageView : ContentPage
+    public partial class MainPage : ContentPage
     {
-        List<ActualPotion> potions;
+        List<Potion> potions;
 
-        public MainPageView(PotionsViewModel vm)
+        public MainPage(PotionsViewModel vm)
         {
             InitializeComponent();
             BindingContext = vm;
@@ -17,8 +17,8 @@ namespace HarryPotterPotions.Views
 
         private async void OnGoToShoppingListClicked(object sender, EventArgs e)
         {
-            //Navigation.PushAsync(new ShoppingListView());
-            await Shell.Current.GoToAsync(nameof(ShoppingListView));
+            //Navigation.PushAsync(new ShoppingListPage());
+            await Shell.Current.GoToAsync(nameof(ShoppingListPage));
             //Shell.Current.GoToAsync("ShoppingList");
 
         }

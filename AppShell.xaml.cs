@@ -7,9 +7,9 @@ namespace HarryPotterPotions
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(MainPageView), typeof(MainPageView));
-            Routing.RegisterRoute(nameof(ShoppingListView), typeof(ShoppingListView));
-            Routing.RegisterRoute(nameof(IngredientInventoryView), typeof(IngredientInventoryView));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(ShoppingListPage), typeof(ShoppingListPage));
+            Routing.RegisterRoute(nameof(IngredientInventoryPage), typeof(IngredientInventoryPage));
         }
     }
 }

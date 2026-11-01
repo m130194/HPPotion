@@ -15,7 +15,7 @@ namespace HarryPotterPotions.Services
         HttpClient _client = new HttpClient();
         const string baseURL = "https://api.potterdb.com/";
 
-        public async Task<List<ActualPotion>> GetPotionsAsync(string SearchParam)
+        public async Task<List<Potion>> GetPotionsAsync(string SearchParam)
         {
             string apiURL = $"{baseURL}v1/potions?filter[name_cont]={SearchParam}";
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, apiURL);
@@ -38,7 +38,7 @@ namespace HarryPotterPotions.Services
 
             //List<Potion> potions = result!.data;
 
-            //return potions.ConvertAll<ActualPotion>(x => x);
+            //return potions.ConvertAll<Potion>(x => x);
             
             JsonNode forecastNode = JsonNode.Parse(contentString);
 
@@ -52,7 +52,7 @@ namespace HarryPotterPotions.Services
 
             JsonArray potionsData = data.AsArray();
 
-            List<ActualPotion> potions = new();
+            List<Potion> potions = new();
 
             foreach (JsonNode? potionData in potionsData)
             {
@@ -60,7 +60,7 @@ namespace HarryPotterPotions.Services
                 string Name = potionData?["attributes"]["name"]?.ToString();
                 string Ingredients = potionData?["attributes"]["ingredients"]?.ToString();
 
-                ActualPotion potion = new ActualPotion
+                Potion potion = new Potion
                 {
                     Id = Id,
                     Name = Name,

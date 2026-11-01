@@ -35,26 +35,26 @@ namespace HarryPotterPotions.ViewModels
             
         }
 
-        //private ActualPotion _selectedPotion;
+        //private Potion _selectedPotion;
 
         private readonly APIService _apiService;
         private readonly Repository _repository;
 
-        public ObservableCollection<ActualPotion> SavedPotionsToMake =>
+        public ObservableCollection<Potion> SavedPotionsToMake =>
             _repository.SavedPotionsToMake;
-        public ObservableCollection<ActualPotion> PotionSearchResults { get; set; } = new();
+        public ObservableCollection<Potion> PotionSearchResults { get; set; } = new();
         public Command ButtonSearchCommand { get; private set; }
         public Command TapAddPotionCommand { get; private set; }
 
-        public Command<ActualPotion> SetSelectedPotionCommand { get; private set; }
+        public Command<Potion> SetSelectedPotionCommand { get; private set; }
 
         public PotionsViewModel(APIService apiService, Repository repository)
         {
             _apiService = apiService;
             _repository = repository;
             ButtonSearchCommand = new Command(async () => await SearchPotionsAsync());
-            TapAddPotionCommand = new Command<ActualPotion>((selectedPotion) => AddPotion(selectedPotion));
-            //SetSelectedPotionCommand = new Command<ActualPotion>((selectedPotion) => SetSelectedPotion(selectedPotion));
+            TapAddPotionCommand = new Command<Potion>((selectedPotion) => AddPotion(selectedPotion));
+            //SetSelectedPotionCommand = new Command<Potion>((selectedPotion) => SetSelectedPotion(selectedPotion));
         }
 
         public async Task SearchPotionsAsync()
@@ -67,12 +67,12 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
-        //public void SetSelectedPotion(ActualPotion selectedPotion)
+        //public void SetSelectedPotion(Potion selectedPotion)
         //{
         //    _selectedPotion = selectedPotion;
         //}
 
-        public void AddPotion(ActualPotion selectedPotion) 
+        public void AddPotion(Potion selectedPotion) 
         {
             if (selectedPotion != null)
             {

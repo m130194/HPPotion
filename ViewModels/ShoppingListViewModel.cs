@@ -16,7 +16,7 @@ namespace HarryPotterPotions.ViewModels
         private readonly SQLService _sqlService;
         private readonly Repository _repository;
 
-        public ObservableCollection<ActualPotion> SavedPotionsToMake =>
+        public ObservableCollection<Potion> SavedPotionsToMake =>
             _repository.SavedPotionsToMake;
 
         
@@ -36,9 +36,9 @@ namespace HarryPotterPotions.ViewModels
 
         public ObservableCollection<string> ShoppingList { get; } = new();
 
-        public void AddIngredientsFromAllSavedPotion(ObservableCollection<ActualPotion> savedPotions)
+        public void AddIngredientsFromAllSavedPotion(ObservableCollection<Potion> savedPotions)
         {
-            foreach (ActualPotion potion in savedPotions ?? SavedPotionsToMake)
+            foreach (Potion potion in savedPotions ?? SavedPotionsToMake)
             {
                 if (potion == null || string.IsNullOrWhiteSpace(potion.Ingredients))
                     continue;
@@ -56,9 +56,9 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
-        //public void AddIngredientsFromAllSavedPotion(ObservableCollection<ActualPotion> savedPotions)
+        //public void AddIngredientsFromAllSavedPotion(ObservableCollection<Potion> savedPotions)
         //{
-        //    foreach (ActualPotion potion in savedPotions ?? SavedPotionsToMake)
+        //    foreach (Potion potion in savedPotions ?? SavedPotionsToMake)
         //    {
         //        if (potion == null || potion.Ingredients == null || potion.Ingredients.Count == 0)
         //            continue;

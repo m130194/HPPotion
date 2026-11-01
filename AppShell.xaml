@@ -11,32 +11,32 @@
     <TabBar>
         <Tab Title="Home">
             <ShellContent
-            ContentTemplate="{DataTemplate views:MainPageView}"
+            ContentTemplate="{DataTemplate views:MainPage}"
              />
         </Tab>
         <Tab Title="Shopping List">
             <ShellContent
-            ContentTemplate="{DataTemplate views:ShoppingListView}"
+            ContentTemplate="{DataTemplate views:ShoppingListPage}"
              />
         </Tab>
         <Tab Title="Ingredient Inventory">
             <ShellContent
-    ContentTemplate="{DataTemplate views:IngredientInventoryView}"
+    ContentTemplate="{DataTemplate views:IngredientInventoryPage}"
      />
         </Tab>
     </TabBar>
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate views:MainPageView}"
+        ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
     <ShellContent
         Title="Shopping List"
-        ContentTemplate="{DataTemplate views:ShoppingListView}"
+        ContentTemplate="{DataTemplate views:ShoppingListPage}"
         Route="ShoppingList" />
     <ShellContent
         Title="Ingredient Inventory"
-        ContentTemplate="{DataTemplate views:IngredientInventoryView}"
+        ContentTemplate="{DataTemplate views:IngredientInventoryPage}"
         Route="IngredientInventory" />
 
 

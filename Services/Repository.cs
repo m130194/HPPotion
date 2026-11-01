@@ -12,11 +12,11 @@ namespace HarryPotterPotions.Services
         /// <summary>
         /// Gets the collection of saved potions that the user wants to make. This collection is used to generate the shopping list of ingredients needed for those potions.
         /// </summary>
-        public ObservableCollection<ActualPotion> SavedPotionsToMake { get; } = new();
+        public ObservableCollection<Potion> SavedPotionsToMake { get; } = new();
 
         public ObservableCollection<Ingredient> Inventory { get; } = new();
 
-        public void AddPotionToSavedPotionsToMake(ActualPotion newPotion)
+        public void AddPotionToSavedPotionsToMake(Potion newPotion)
         {
             SavedPotionsToMake.Add(newPotion);
         }

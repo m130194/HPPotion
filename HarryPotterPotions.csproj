@@ -83,19 +83,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\MainPageView.xaml.cs">
-	    <DependentUpon>MainPageView.xaml</DependentUpon>
+	  <Compile Update="Views\IngredientInventoryPage.xaml.cs">
+	    <DependentUpon>IngredientInventoryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ShoppingListPage.xaml.cs">
+	    <DependentUpon>ShoppingListPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\IngredientInventoryView.xaml">
+	  <MauiXaml Update="Views\IngredientInventoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\MainPageView.xaml">
+	  <MauiXaml Update="Views\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ShoppingListView.xaml">
+	  <MauiXaml Update="Views\PreferencesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShoppingListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
