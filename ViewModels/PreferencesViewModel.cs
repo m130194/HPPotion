@@ -33,15 +33,6 @@ namespace HarryPotterPotions.ViewModels
 
         public int FontSize
         {
-            //get => _prefsService.GetPreference("FontSize", 12);
-            //set
-            //{
-            //    if (value != FontSize)
-            //    {
-            //        _prefsService.SetPreference("FontSize", value);
-            //        OnPropertyChanged();
-            //    }
-            //}
             get => field;
             set
             {
