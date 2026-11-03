@@ -8,24 +8,6 @@
     FlyoutBehavior="Flyout"
     Title="HarryPotterPotions">
 
-    <TabBar>
-        <Tab Title="Home">
-            <ShellContent
-            ContentTemplate="{DataTemplate views:MainPage}"
-             />
-        </Tab>
-        <Tab Title="Shopping List">
-            <ShellContent
-            ContentTemplate="{DataTemplate views:ShoppingListPage}"
-             />
-        </Tab>
-        <Tab Title="Ingredient Inventory">
-            <ShellContent
-    ContentTemplate="{DataTemplate views:IngredientInventoryPage}"
-     />
-        </Tab>
-    </TabBar>
-
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:MainPage}"
@@ -38,6 +20,9 @@
         Title="Ingredient Inventory"
         ContentTemplate="{DataTemplate views:IngredientInventoryPage}"
         Route="IngredientInventory" />
-
+    <ShellContent
+    Title="User Preferences"
+    ContentTemplate="{DataTemplate views:PreferencesPage}"
+    Route="UserPreferences" />
 
 </Shell>
