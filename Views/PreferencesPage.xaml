@@ -3,23 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:HarryPotterPotions.ViewModels"
              x:Class="HarryPotterPotions.Views.PreferencesPage"
-             x:DataType="viewmodel:PreferencesViewModel"
+             x:DataType="viewmodel:AppViewModel"
              Title="PreferencesPage">
     <ScrollView>
         <VerticalStackLayout>
             <!-- Sample Label whose font size changes -->
             <Label Text="Drag the slider to change this text size!"
-               FontSize="{Binding FontSize}"
+               FontSize="{Binding GlobalFontSize}"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
 
             <!-- Slider bound to the same FontSize property -->
             <Slider Minimum="10"
                 Maximum="50"
-                Value="{Binding FontSize, Mode=TwoWay}" />
+                Value="{Binding GlobalFontSize, Mode=TwoWay}" />
 
             <!-- Display the current font size value -->
-            <Label Text="{Binding FontSize, StringFormat='Current Size: {0:F0}'}"
+            <Label Text="{Binding GlobalFontSize, StringFormat='Current Size: {0:F0}'}"
                HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>

@@ -2,7 +2,9 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HarryPotterPotions"
-             x:Class="HarryPotterPotions.App">
+             x:Class="HarryPotterPotions.App"
+             xmlns:viewmodel="clr-namespace:HarryPotterPotions.ViewModels"
+             x:DataType="viewmodel:AppViewModel">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -10,5 +12,9 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="{Binding Source={StaticResource AppViewModel},
+                   Path=GlobalFontSize}" />
+        </Style>
     </Application.Resources>
 </Application>
