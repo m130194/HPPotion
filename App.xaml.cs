@@ -8,12 +8,11 @@ namespace HarryPotterPotions
     public partial class App : Application
     {
 
-        public static AppViewModel AppVM { get;  } = new();
-
-        public App()
+        public App(AppViewModel appVM)
         {
             InitializeComponent();
-            BindingContext = AppVM;
+            Resources.Add("AppViewModel", appVM);
+            MainPage = new AppShell();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

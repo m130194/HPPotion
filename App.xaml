@@ -12,9 +12,6 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource AppViewModel},
-                   Path=GlobalFontSize}" />
-        </Style>
+        <x:Double x:Key="GlobalFontSize">14</x:Double>
     </Application.Resources>
 </Application>

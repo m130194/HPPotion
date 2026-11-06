@@ -9,17 +9,17 @@
         <VerticalStackLayout>
             <!-- Sample Label whose font size changes -->
             <Label Text="Drag the slider to change this text size!"
-               FontSize="{Binding GlobalFontSize}"
+               FontSize="{DynamicResource GlobalFontSize}"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
 
             <!-- Slider bound to the same FontSize property -->
             <Slider Minimum="10"
                 Maximum="50"
-                Value="{Binding GlobalFontSize, Mode=TwoWay}" />
+                Value="{Binding GlobalFontSize}" />
 
             <!-- Display the current font size value -->
-            <Label Text="{Binding GlobalFontSize, StringFormat='Current Size: {0:F0}'}"
+            <Label Text="{Binding GlobalFontSize}"
                HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>

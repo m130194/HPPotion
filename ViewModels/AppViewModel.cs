@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 
@@ -8,28 +9,38 @@ namespace HarryPotterPotions.ViewModels
 {
     public class AppViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string name) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        private double _globalFontSize = 14;
+       private double _globalFontSize = 14;
         public double GlobalFontSize
         {
             get => _globalFontSize;
             set
             {
+                if (_globalFontSize == value)
+                    return;
                 _globalFontSize = value;
+                Preferences.Default.Set(
+            "AppFontSize",
+            value);
                 OnPropertyChanged(nameof(GlobalFontSize));
+                Application.Current!.Resources["GlobalFontSize"] = value;
             }
         }
 
-        public Command IncreaseFontCommand { get; private set; }
-        public Command DecreaseFontCommand { get; private set; }
-   
         public AppViewModel()
         {
-            IncreaseFontCommand = new Command(() => GlobalFontSize += 2);
-            DecreaseFontCommand = new Command(() => GlobalFontSize -= 2);
+            GlobalFontSize =
+                Preferences.Default.Get("GlobalFontSize", 14d);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(
+            [CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(propertyName));
         }
     }
 }

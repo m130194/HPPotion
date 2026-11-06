@@ -42,6 +42,7 @@ namespace HarryPotterPotions
             builder.Services.AddSingleton<Repository>();
             builder.Services.AddSingleton<SQLService>();
             builder.Services.AddSingleton<APIService>();
+            builder.Services.AddSingleton<AppViewModel>();
             builder.Services.AddSingleton<PreferencesService>();
             builder.Services.AddTransient<PotionsViewModel>();
             builder.Services.AddTransient<ShoppingListViewModel>();
