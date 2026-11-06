@@ -8,11 +8,11 @@ namespace HarryPotterPotions
     public partial class App : Application
     {
 
-        public App(AppViewModel appVM)
+        public App()
         {
             InitializeComponent();
-            Resources.Add("AppViewModel", appVM);
-            MainPage = new AppShell();
+            double globalFontSize = Preferences.Default.Get("GlobalFontSize", 14);
+            Application.Current!.Resources["GlobalFontSize"] = globalFontSize;
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

@@ -10,27 +10,29 @@ namespace HarryPotterPotions.ViewModels
     public class AppViewModel : INotifyPropertyChanged
     {
 
-       private double _globalFontSize = 14;
+        private double _globalFontSize;
         public double GlobalFontSize
         {
             get => _globalFontSize;
             set
             {
-                if (_globalFontSize == value)
-                    return;
-                _globalFontSize = value;
-                Preferences.Default.Set(
-            "AppFontSize",
-            value);
-                OnPropertyChanged(nameof(GlobalFontSize));
+                //if (_globalFontSize == value)
+                //    return;
                 Application.Current!.Resources["GlobalFontSize"] = value;
+                _globalFontSize = value;
+                
+                OnPropertyChanged(nameof(GlobalFontSize));
+                
+                Preferences.Default.Set(
+            "GlobalFontSize",
+            value);
             }
         }
 
         public AppViewModel()
         {
-            GlobalFontSize =
-                Preferences.Default.Get("GlobalFontSize", 14d);
+            //GlobalFontSize =
+            //    Preferences.Default.Get("GlobalFontSize", 20);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

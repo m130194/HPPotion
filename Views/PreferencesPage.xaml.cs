@@ -5,9 +5,9 @@ using HarryPotterPotions.ViewModels;
 
 public partial class PreferencesPage : ContentPage
 {
-	public PreferencesPage()
+	public PreferencesPage(AppViewModel appVM)
 	{
 		InitializeComponent();
-		BindingContext = Application.Current!.Resources["AppViewModel"];
+		BindingContext = appVM;
 	}
 }
