@@ -3,8 +3,11 @@ using HarryPotterPotions.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+
+
 
 namespace HarryPotterPotions.ViewModels
 {
@@ -48,10 +51,11 @@ namespace HarryPotterPotions.ViewModels
                     .Select(i => i.Trim())
                     .Where(i => !string.IsNullOrEmpty(i));
 
-                foreach (var ingredient in ingredients)
+                foreach (var ingredientLine in ingredients)
                 {
-                    if (!ShoppingList.Contains(ingredient))
-                        ShoppingList.Add(ingredient);
+
+                    if (!ShoppingList.Contains(ingredientLine))
+                        ShoppingList.Add(ingredientLine);
                 }
             }
         }
@@ -87,25 +91,46 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
-        public async Task AddIngredientToInventoryAsync(string ingredient)
+        public async Task AddIngredientToInventoryAsync(string ingredientLine)
         {
             //if (string.IsNullOrEmpty(ingredient))
                 
 
-            if (ShoppingList.Contains(ingredient))
+            if (ShoppingList.Contains(ingredientLine))
             {
-                Ingredient newIngredient = new()
-                {
-                    Name = ingredient,
-                    Quantity = 1,
-                    Measurement = "item"
-                };
-                //TODO: Add error handling
-                int result = await _sqlService.AddIngredientAsync(newIngredient);
-                //access Inventory observable collection from here?
-                _repository.AddIngredientToIngredientInventory(newIngredient);
-                
+                // 1. Extract all numbers (\d+ matches one or more digits)
+                MatchCollection numberMatches = Regex.Matches(ingredientLine, @"\d+");
 
+                // This pattern splits:
+                // - Between a letter and a digit (?<=[a-zA-Z])(?=\d)
+                // - OR between a digit and a letter (?<=\d)(?=[a-zA-Z])
+                string pattern = @"(?<=[a-zA-Z])(?=\d)|(?<=\d)(?=[a-zA-Z])";
+
+                string[] pieces = Regex.Split(ingredientLine, pattern);
+
+
+                foreach (string piece in pieces)
+                {
+                    int quantity = 1; // Default quantity if no number is found
+                    if (numberMatches.Count > 0)
+                    {
+                        quantity = int.Parse(numberMatches[0].Value);
+                    }
+                    Ingredient newIngredient = new()
+                    {
+                        Name = piece,
+                        Quantity = quantity,
+                        Measurement = "item"
+                    };
+                    
+                    //TODO: Add error handling
+                    int result = await _sqlService.AddIngredientAsync(newIngredient);
+                    //access Inventory observable collection from here?
+                    _repository.AddIngredientToIngredientInventory(newIngredient);
+
+                }
+
+                ShoppingList.Remove(ingredientLine);
 
             }
 
