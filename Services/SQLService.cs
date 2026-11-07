@@ -65,5 +65,32 @@ namespace HarryPotterPotions.Services
             return await _connection.FindAsync<Ingredient>(id);
         }
 
+        public async Task<Ingredient> ReadIngredientByNameAsync(string name)
+        {
+            await InitAsync();
+            return await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
+        }
+
+        public async Task<Ingredient> FindIngredientByNameAsync(string name)
+        {
+            await InitAsync();
+            return await _connection.FindAsync<Ingredient>(i => i.Name == name);
+        }
+
+        public async Task<int> UpdateIngredientQuantityAsync(string name, int newQuantity)
+        {
+            await InitAsync();
+            var ingredient = await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
+            if (ingredient != null)
+            {
+                int rowsAffected = await _connection.ExecuteAsync(
+                    "UPDATE Ingredient SET Quantity = ? WHERE Name = ?",
+                    newQuantity,
+                    name
+                );
+            }
+            return 0; // Return 0 if the ingredient was not found
+        }
+
     }
 }

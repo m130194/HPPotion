@@ -106,27 +106,44 @@ namespace HarryPotterPotions.ViewModels
                 // - OR between a digit and a letter (?<=\d)(?=[a-zA-Z])
                 string pattern = @"(?<=[a-zA-Z])(?=\d)|(?<=\d)(?=[a-zA-Z])";
 
-                string[] pieces = Regex.Split(ingredientLine, pattern);
+                string[] ingredientNames = Regex.Split(ingredientLine, pattern);
 
 
-                foreach (string piece in pieces)
+                foreach (string ingredientName in ingredientNames)
                 {
-                    int quantity = 1; // Default quantity if no number is found
-                    if (numberMatches.Count > 0)
-                    {
-                        quantity = int.Parse(numberMatches[0].Value);
-                    }
-                    Ingredient newIngredient = new()
-                    {
-                        Name = piece,
-                        Quantity = quantity,
-                        Measurement = "item"
-                    };
                     
-                    //TODO: Add error handling
-                    int result = await _sqlService.AddIngredientAsync(newIngredient);
-                    //access Inventory observable collection from here?
-                    _repository.AddIngredientToIngredientInventory(newIngredient);
+
+                    Ingredient existingIngredient = await _sqlService.FindIngredientByNameAsync(ingredientName);
+                    if (existingIngredient != null)
+                    {
+                        // If the ingredient exists, update its quantity
+                        int quantityToAdd = 1; // Default quantity if no number is found
+                        if (numberMatches.Count > 0)
+                        {
+                            quantityToAdd = int.Parse(numberMatches[0].Value);
+                        }
+                        //existingIngredient.Quantity += quantityToAdd;
+                        await _sqlService.UpdateIngredientQuantityAsync(existingIngredient.Name, existingIngredient.Quantity + quantityToAdd);
+                    }
+                    else
+                    {
+                        int quantity = 1; // Default quantity if no number is found
+                        if (numberMatches.Count > 0)
+                        {
+                            quantity = int.Parse(numberMatches[0].Value);
+                        }
+                        Ingredient newIngredient = new()
+                        {
+                            Name = ingredientName,
+                            Quantity = quantity,
+                            Measurement = "item"
+                        };
+
+                        //TODO: Add error handling
+                        int result = await _sqlService.AddIngredientAsync(newIngredient);
+                        //access Inventory observable collection from here?
+                        _repository.AddIngredientToIngredientInventory(newIngredient);
+                    }
 
                 }
 

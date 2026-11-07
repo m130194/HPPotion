@@ -78,8 +78,9 @@
                     <DataTemplate x:DataType="models:Ingredient">
                         <HorizontalStackLayout>
                             <Label Text="{Binding ID}"/>
+
+                            <Label Text="{Binding Quantity}" />
                             <Label Text="{Binding Name}"/>
-                            <Label Text="{Binding Quantity}"/>
                             <Button Text="Delete" Command="{Binding Source={x:Reference ThisIngredientInventory}, Path=BindingContext.ButtonDeleteCommand}" CommandParameter="{Binding .}"/>
                         </HorizontalStackLayout>
                     </DataTemplate>
