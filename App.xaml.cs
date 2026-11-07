@@ -8,8 +8,7 @@ namespace HarryPotterPotions
     public partial class App : Application
     {
 
-        //this is for testing purposes
-        bool hasValue = Preferences.Default.ContainsKey("GlobalFontSize");
+        
 
         public App()
         {
@@ -17,6 +16,9 @@ namespace HarryPotterPotions
             double globalFontSize = Preferences.Default.Get("GlobalFontSize", 14);
             Application.Current!.Resources["GlobalFontSize"] = globalFontSize;
         }
+
+        //this is for testing purposes
+        bool hasValue = Preferences.Default.ContainsKey("GlobalFontSize");
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
