@@ -10,30 +10,36 @@ namespace HarryPotterPotions.ViewModels
     public class AppViewModel : INotifyPropertyChanged
     {
 
-        private double _globalFontSize;
+        
+
+        private double _globalFontSize = Preferences.Default.Get("GlobalFontSize", 20);
         public double GlobalFontSize
         {
             get => _globalFontSize;
             set
             {
-                //if (_globalFontSize == value)
-                //    return;
-                Application.Current!.Resources["GlobalFontSize"] = value;
+
                 _globalFontSize = value;
-                
-                OnPropertyChanged(nameof(GlobalFontSize));
-                
+
                 Preferences.Default.Set(
-            "GlobalFontSize",
-            value);
+                        "GlobalFontSize",
+                        value);
+
+                OnPropertyChanged(nameof(GlobalFontSize));
+
+                Application.Current!.Resources["GlobalFontSize"] = value;
             }
         }
 
+        //this is for testing purposes. why is this always false?
+        bool hasValue = Preferences.Default.ContainsKey("GlobalFontSize");
+
         public AppViewModel()
         {
-            //GlobalFontSize =
-            //    Preferences.Default.Get("GlobalFontSize", 20);
+
         }
+
+        //bool hasValue = Preferences.Default.ContainsKey("GlobalFontSize");
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -8,6 +8,9 @@ namespace HarryPotterPotions
     public partial class App : Application
     {
 
+        //this is for testing purposes
+        bool hasValue = Preferences.Default.ContainsKey("GlobalFontSize");
+
         public App()
         {
             InitializeComponent();
