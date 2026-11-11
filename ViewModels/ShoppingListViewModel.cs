@@ -38,6 +38,7 @@ namespace HarryPotterPotions.ViewModels
         }
 
         public ObservableCollection<string> ShoppingList { get; } = new();
+        //private bool _isIngredientSelected = false;
 
         public void AddIngredientsFromAllSavedPotion(ObservableCollection<Potion> savedPotions)
         {
@@ -53,9 +54,9 @@ namespace HarryPotterPotions.ViewModels
 
                 foreach (var ingredientLine in ingredients)
                 {
-
                     if (!ShoppingList.Contains(ingredientLine))
                         ShoppingList.Add(ingredientLine);
+                    //add code here for adding quantities of ingredients to the shopping list, if the ingredient already exists in the list, update the quantity instead of adding a new entry
                 }
             }
         }
@@ -85,11 +86,11 @@ namespace HarryPotterPotions.ViewModels
 
         public void RemoveIngredient(string ingredient)
         {
-            if (ShoppingList.Contains(ingredient))
-            {
-                ShoppingList.Remove(ingredient);
-            }
+            ShoppingList.Remove(ingredient);
         }
+
+
+
 
         public async Task AddIngredientToInventoryAsync(string ingredientLine)
         {

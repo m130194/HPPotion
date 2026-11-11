@@ -50,9 +50,10 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="Models:Potion">
-                        <VerticalStackLayout>
+                        <HorizontalStackLayout>
                             <Label Text="{Binding Name}" />
-                        </VerticalStackLayout>
+                            <Button Text="Delete" Command="{Binding Source={x:Reference ThisMainPage}, Path=BindingContext.DeletePotionCommand}" CommandParameter="{Binding .}" BackgroundColor="Red" />
+                        </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

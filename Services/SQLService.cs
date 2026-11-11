@@ -1,4 +1,5 @@
-﻿using HarryPotterPotions.Models;
+﻿
+using HarryPotterPotions.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,16 @@ namespace HarryPotterPotions.Services
         {
             await InitAsync();
             return await _connection.FindAsync<Ingredient>(i => i.Name == name);
+        }
+
+        public async Task<List<Ingredient>> FindIngredientByNameWildcardAsync(string name)
+        {
+            await InitAsync();
+            var items = await _connection.QueryAsync<Ingredient>(
+    "SELECT * FROM Ingredient WHERE Name LIKE ?",
+    $"%{name}%"
+);
+            return items; // Return all matching items
         }
 
         public async Task<int> UpdateIngredientQuantityAsync(string name, int newQuantity)

@@ -3,6 +3,8 @@ using HarryPotterPotions.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,7 +12,7 @@ using System.Windows.Input;
 namespace HarryPotterPotions.ViewModels
 {
     
-    public class IngredientInventoryViewModel
+    public class IngredientInventoryViewModel : INotifyPropertyChanged
     {
         
 
@@ -20,6 +22,30 @@ namespace HarryPotterPotions.ViewModels
         public Command ButtonRefreshCommand { get; private set; }
         public Command ButtonSaveCommand { get; private set; }
         public Command ButtonDeleteCommand { get; private set; }
+        public Command SearchCommand { get; private set; }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+                SearchCommand.Execute(null); // Trigger the search command whenever the search text changes
+                //_sqlService.FindIngredientByNameWildcardAsync(_searchText);
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(
+            [CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(propertyName));
+        }
 
         public IngredientInventoryViewModel(SQLService SqlService, Repository repository)
         {
@@ -33,6 +59,7 @@ namespace HarryPotterPotions.ViewModels
             ////initialize the command property in the constructor
             ButtonRefreshCommand = new Command(async () => await SeeIngredientsAsync());
             ////ButtonRefreshCommand.CanExecute
+            SearchCommand = new Command(async () => await SearchIngredientByNameAsync());
             ButtonSaveCommand = new Command(async () => await SaveIngredientAsync());
 
             ButtonDeleteCommand = new Command<Ingredient>(async (ingredient) => await RemoveIngredientAsync(ingredient));
@@ -47,6 +74,22 @@ namespace HarryPotterPotions.ViewModels
                 Inventory.Add(ingredient);
             }
         }
+
+        public async Task SearchIngredientByNameAsync()
+        {
+            Inventory.Clear();
+            var ingredients = await _sqlService.FindIngredientByNameWildcardAsync(SearchText);
+            if (ingredients != null)
+            {
+                foreach (var ingredient in ingredients)
+                {
+                    Inventory.Add(ingredient);
+                }
+            }
+        }
+
+
+
         //TODO: Add a method to save a new ingredient to the database and update the Inventory collection
         public async Task SaveIngredientAsync()
         {

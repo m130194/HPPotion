@@ -42,12 +42,13 @@
                         </SwipeView.RightItems>
                     </SwipeView>-->
                     <HorizontalStackLayout Spacing="20">
+                        <CheckBox Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
                         <Label Text="{Binding .}" FontSize="30" VerticalOptions="Center" />
                         <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
                         <Button Text="Add to Inventory" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
 
                     </HorizontalStackLayout>
-                    <!--</SwipeView>-->
+                    <!--</SwipeView-->
 
 
 

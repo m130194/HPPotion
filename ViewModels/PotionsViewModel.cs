@@ -15,7 +15,7 @@ namespace HarryPotterPotions.ViewModels
     public class PotionsViewModel : INotifyPropertyChanged
 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged(string searchParam)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(searchParam));
@@ -45,6 +45,7 @@ namespace HarryPotterPotions.ViewModels
         public ObservableCollection<Potion> PotionSearchResults { get; set; } = new();
         public Command ButtonSearchCommand { get; private set; }
         public Command TapAddPotionCommand { get; private set; }
+        public Command DeletePotionCommand { get; private set; }
 
         public Command<Potion> SetSelectedPotionCommand { get; private set; }
 
@@ -54,7 +55,9 @@ namespace HarryPotterPotions.ViewModels
             _repository = repository;
             ButtonSearchCommand = new Command(async () => await SearchPotionsAsync());
             TapAddPotionCommand = new Command<Potion>((selectedPotion) => AddPotion(selectedPotion));
+            DeletePotionCommand = new Command<Potion>((selectedPotion) => DeletePotion(selectedPotion));
             //SetSelectedPotionCommand = new Command<Potion>((selectedPotion) => SetSelectedPotion(selectedPotion));
+
         }
 
         public async Task SearchPotionsAsync()
@@ -81,7 +84,13 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
-
+        public void DeletePotion(Potion selectedPotion)
+        {
+            if (selectedPotion != null)
+            {
+                SavedPotionsToMake.Remove(selectedPotion);
+            }
+        }
 
 
         //Binding code ItemsSource="{Binding Source={x:Reference MainPage}, Path=BindingContext.PotionSearchResults}   

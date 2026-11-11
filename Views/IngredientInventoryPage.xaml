@@ -65,14 +65,14 @@
         <StackLayout
             Orientation="Vertical"
             Style="{StaticResource MyStackLayoutStyle}">
-            <Entry x:Name="EntryQuantity" />
-            <Entry x:Name="EntryName" />
-            <Button Text="Save" Command="{Binding ButtonSaveCommand}"/>
+
+            <Entry Text="{Binding SearchText, Mode=TwoWay}" />
+            <Button Text="Search" Command="{Binding SearchCommand}"/>
             <Button Text="Refresh" Command="{Binding ButtonRefreshCommand}"/>
 
             <CollectionView ItemsSource="{Binding Inventory}">
                 <CollectionView.EmptyView>
-                    <Label Text="No saved inventory." />
+                    <Label Text="No such ingredient found." />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Ingredient">

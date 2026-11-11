@@ -18,16 +18,16 @@ namespace HarryPotterPotions.ViewModels
             get => _globalFontSize;
             set
             {
-
-                _globalFontSize = value;
+                double roundedValue = Math.Round(value);
+                _globalFontSize = roundedValue;
 
                 Preferences.Default.Set(
                         "GlobalFontSize",
-                        value);
+                        roundedValue);
 
                 OnPropertyChanged(nameof(GlobalFontSize));
 
-                Application.Current!.Resources["GlobalFontSize"] = value;
+                Application.Current!.Resources["GlobalFontSize"] = roundedValue;
             }
         }
 
