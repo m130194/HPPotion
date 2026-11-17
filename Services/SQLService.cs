@@ -88,9 +88,10 @@ namespace HarryPotterPotions.Services
             return items; // Return all matching items
         }
 
-        public async Task<int> UpdateIngredientQuantityAsync(string name, int newQuantity)
+        public async Task<int> UpdateIngredientQuantityByNameAsync(string name, int newQuantity)
         {
             await InitAsync();
+
             var ingredient = await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
             if (ingredient != null)
             {
@@ -98,6 +99,23 @@ namespace HarryPotterPotions.Services
                     "UPDATE Ingredient SET Quantity = ? WHERE Name = ?",
                     newQuantity,
                     name
+                );
+                return rowsAffected;
+            }
+            return 0; // Return 0 if the ingredient was not found
+        }
+
+        public async Task<int> UpdateIngredientQuantityByIdAsync(int id, int newQuantity)
+        {
+            await InitAsync();
+            //var ingredient = await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
+            var result = await _connection.FindAsync<Ingredient>(id);
+            if (result != null)
+            {
+                await _connection.ExecuteAsync(
+                    "UPDATE Ingredient SET Quantity = ? WHERE Id = ?",
+                    newQuantity,
+                    id
                 );
             }
             return 0; // Return 0 if the ingredient was not found

@@ -12,8 +12,12 @@ namespace HarryPotterPotions
 
         public App()
         {
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) => {
+                System.Diagnostics.Debug.WriteLine($"Crash: {((Exception)args.ExceptionObject).Message}");
+                System.Diagnostics.Debug.WriteLine($"Inner: {((Exception)args.ExceptionObject).InnerException}");
+            };
             InitializeComponent();
-            double globalFontSize = Preferences.Default.Get("GlobalFontSize", 14);
+            double globalFontSize = Preferences.Default.Get("GlobalFontSize", (double)14d);
             Application.Current!.Resources["GlobalFontSize"] = globalFontSize;
         }
 

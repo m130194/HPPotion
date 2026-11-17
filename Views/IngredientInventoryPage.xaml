@@ -7,7 +7,7 @@
              
              x:Class="HarryPotterPotions.Views.IngredientInventoryPage"
              x:Name="ThisIngredientInventory"
-             Title="IngredientInventoryView">
+             Title="Ingredient Inventory">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="StackLayout" x:Name="MyStackLayoutStyle">
@@ -18,9 +18,9 @@
                                 <VisualState.StateTriggers>
                                     <OrientationStateTrigger Orientation="Portrait" />
                                 </VisualState.StateTriggers>
-                             <VisualState.Setters>
+                                <VisualState.Setters>
                                     <Setter Property="Orientation" Value="Vertical" />
-                             </VisualState.Setters>
+                                </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Landscape">
                                 <VisualState.StateTriggers>
@@ -66,9 +66,10 @@
             Orientation="Vertical"
             Style="{StaticResource MyStackLayoutStyle}">
 
-            <Entry Text="{Binding SearchText, Mode=TwoWay}" />
-            <Button Text="Search" Command="{Binding SearchCommand}"/>
-            <Button Text="Refresh" Command="{Binding ButtonRefreshCommand}"/>
+
+            <SearchBar Text="{Binding SearchText, Mode=TwoWay}" />
+            <Button Text="Search" Command="{Binding SearchCommand}" MaximumWidthRequest="200"/>
+            <Button Text="See all ingredients" Command="{Binding ButtonRefreshCommand}" WidthRequest="300"/>
 
             <CollectionView ItemsSource="{Binding Inventory}">
                 <CollectionView.EmptyView>
@@ -76,13 +77,22 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Ingredient">
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding ID}"/>
+                        <Grid RowDefinitions="*"
+ColumnDefinitions="*,*,*,3*,*"
+RowSpacing="10"
+ColumnSpacing="10"
+Margin="10"
+Padding="10">
 
-                            <Label Text="{Binding Quantity}" />
-                            <Label Text="{Binding Name}"/>
-                            <Button Text="Delete" Command="{Binding Source={x:Reference ThisIngredientInventory}, Path=BindingContext.ButtonDeleteCommand}" CommandParameter="{Binding .}"/>
-                        </HorizontalStackLayout>
+
+                            <Button Text="Save" x:Name="SaveQuantityButton" Command="{Binding Source={x:Reference ThisIngredientInventory}, Path=BindingContext.EditQuantityCommand}" CommandParameter="{Binding .}" Grid.Column="0" Grid.Row="0"/>
+                            <Stepper Value="{Binding Quantity, Mode=TwoWay}" Increment="1" Minimum="0" x:Name="QuantityStepper" Grid.Column="1" Grid.Row="0"/>
+                            <Label Text="{Binding Source={x:Reference QuantityStepper}, Path=Value}" Grid.Column="2" Grid.Row="0"/>
+                            <!--<Entry Placeholder="{Binding Quantity}" Text="{Binding Source={x:Reference ThisIngredientInventory}, Mode=TwoWay, Path=CommandParameter.Quantity}" Grid.Column="1" Grid.Row="0"/>-->
+                            <Label Text="{Binding Name}" Grid.Column="3" Grid.Row="0"/>
+                            <Button Text="Delete" Command="{Binding Source={x:Reference ThisIngredientInventory}, Path=BindingContext.ButtonDeleteCommand}" CommandParameter="{Binding .}" Grid.Column="4" Grid.Row="0"/>
+
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

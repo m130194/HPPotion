@@ -12,7 +12,7 @@ namespace HarryPotterPotions.ViewModels
 
         
 
-        private double _globalFontSize = Preferences.Default.Get("GlobalFontSize", 20);
+        private double _globalFontSize = Preferences.Default.Get("GlobalFontSize", (double)14d);
         public double GlobalFontSize
         {
             get => _globalFontSize;

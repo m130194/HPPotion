@@ -46,7 +46,7 @@ namespace HarryPotterPotions
             builder.Services.AddTransient<PotionsViewModel>();
             builder.Services.AddTransient<ShoppingListViewModel>();
             builder.Services.AddTransient<IngredientInventoryViewModel>();
-            builder.Services.AddTransient<PreferencesViewModel>();
+
             builder.Services.AddSingleton<AppViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();

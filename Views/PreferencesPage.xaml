@@ -4,9 +4,9 @@
              xmlns:viewmodel="clr-namespace:HarryPotterPotions.ViewModels"
              x:Class="HarryPotterPotions.Views.PreferencesPage"
              x:DataType="viewmodel:AppViewModel"
-             Title="PreferencesPage">
+             Title="User Preferences">
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout VerticalOptions="Center" Margin="20">
             <!-- Sample Label whose font size changes -->
             <Label Text="Drag the slider to change font size"
                FontSize="{Binding GlobalFontSize}"
@@ -16,6 +16,7 @@
             <!-- Slider bound to the same FontSize property -->
             <Slider Minimum="10"
                 Maximum="30"
+                    WidthRequest="400"
                 Value="{Binding GlobalFontSize, Mode=TwoWay}"/>
 
             <!-- Display the current font size value -->

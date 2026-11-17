@@ -42,22 +42,38 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Add Potion to Saved Potions" Command="{Binding ButtonAddPotionCommand}" />
+            <!--<Button Text="Add Potion to Saved Potions" Command="{Binding ButtonAddPotionCommand}" />-->
+            <Border Stroke="#C49B33"
+        StrokeThickness="2"
+        Padding="10"
+        BackgroundColor="Transparent">
 
-            <CollectionView ItemsSource="{Binding SavedPotionsToMake}">
+                <!-- Optional: Add rounded corners -->
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Grid RowDefinitions="50,*" ColumnDefinitions="*">
+                <Label Text="Potions To Make:" Grid.Row="0" Grid.Column="0"/>
+            <CollectionView ItemsSource="{Binding SavedPotionsToMake}" Grid.Row="1" Grid.Column="0">
                 <CollectionView.EmptyView>
                     <Label Text="No saved potions." />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="Models:Potion">
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding Name}" />
-                            <Button Text="Delete" Command="{Binding Source={x:Reference ThisMainPage}, Path=BindingContext.DeletePotionCommand}" CommandParameter="{Binding .}" BackgroundColor="Red" />
-                        </HorizontalStackLayout>
+
+                            <Grid RowDefinitions="*"
+                              ColumnDefinitions="4*,*"
+                              RowSpacing="10"
+                              ColumnSpacing="10">
+                            <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="0"/>
+                            <Button Text="Delete" Command="{Binding Source={x:Reference ThisMainPage}, Path=BindingContext.DeletePotionCommand}" CommandParameter="{Binding .}" BackgroundColor="Red" Grid.Row="0" Grid.Column="1" />
+                        </Grid>
+                            
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
+                </Grid>
+            </Border>
             <Button Text="Go to Shopping List" Clicked="OnGoToShoppingListClicked" />
         </VerticalStackLayout>
     </ScrollView>

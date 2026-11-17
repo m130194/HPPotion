@@ -7,9 +7,11 @@
              x:DataType="viewmodel:ShoppingListViewModel"
              x:Name="ThisShoppingListPage"
              Title="Shopping List">
-    <VerticalStackLayout>
 
 
+
+    <ScrollView>
+        <VerticalStackLayout>
         <CollectionView ItemsSource="{Binding SavedPotionsToMake}">
             <CollectionView.EmptyView>
                 <Label Text="No saved potions." />
@@ -41,13 +43,22 @@
                             </SwipeItems>
                         </SwipeView.RightItems>
                     </SwipeView>-->
-                    <HorizontalStackLayout Spacing="20">
-                        <CheckBox Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
-                        <Label Text="{Binding .}" FontSize="30" VerticalOptions="Center" />
-                        <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
-                        <Button Text="Add to Inventory" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
+                    <Grid RowDefinitions="*"
+      ColumnDefinitions="*,3*,*"
+      RowSpacing="10"
+      ColumnSpacing="10"
+      Margin="10"
+      Padding="10">
 
-                    </HorizontalStackLayout>
+                    
+                    
+                        <CheckBox Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="0" Grid.Row="0"/>
+                                <Label Text="{Binding .}" FontSize="30" VerticalOptions="Center" Grid.Column="1" Grid.Row="0"/>
+                            <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" Grid.Column="2" Grid.Row="0"/>
+                                
+
+                    
+                        </Grid>
                     <!--</SwipeView-->
 
 
@@ -58,4 +69,5 @@
 
 
     </VerticalStackLayout>
+        </ScrollView>
 </ContentPage>

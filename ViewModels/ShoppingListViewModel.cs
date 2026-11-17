@@ -124,7 +124,7 @@ namespace HarryPotterPotions.ViewModels
                             quantityToAdd = int.Parse(numberMatches[0].Value);
                         }
                         //existingIngredient.Quantity += quantityToAdd;
-                        await _sqlService.UpdateIngredientQuantityAsync(existingIngredient.Name, existingIngredient.Quantity + quantityToAdd);
+                        await _sqlService.UpdateIngredientQuantityByNameAsync(existingIngredient.Name, existingIngredient.Quantity + quantityToAdd);
                     }
                     else
                     {

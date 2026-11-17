@@ -5,10 +5,39 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:HarryPotterPotions"
     xmlns:views="clr-namespace:HarryPotterPotions.Views"
-    FlyoutBehavior="Flyout"
+    Shell.FlyoutBehavior="Disabled"
     Title="HarryPotterPotions">
 
-    <ShellContent
+    
+
+    <TabBar>
+        <Tab Title="Search Potions">
+            <ShellContent
+                Title="One"
+                ContentTemplate="{DataTemplate views:MainPage}"
+                Route="OnePage" />
+        </Tab>
+        <Tab Title="Shopping List">
+            <ShellContent
+                Title="Two"
+                ContentTemplate="{DataTemplate views:ShoppingListPage}"
+                Route="ShoppingListPage" />
+        </Tab>
+        <Tab Title="Inventory">
+            <ShellContent
+                Title="Three"
+                ContentTemplate="{DataTemplate views:IngredientInventoryPage}"
+                Route="ThreePage" />
+        </Tab>
+        <Tab Title="Preferences">
+            <ShellContent
+                Title="Four"
+                ContentTemplate="{DataTemplate views:PreferencesPage}"
+                Route="FourPage" />
+        </Tab>
+    </TabBar>
+
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
@@ -23,6 +52,6 @@
     <ShellContent
     Title="User Preferences"
     ContentTemplate="{DataTemplate views:PreferencesPage}"
-    Route="UserPreferences" />
+    Route="UserPreferences" />-->
 
 </Shell>

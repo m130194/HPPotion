@@ -24,6 +24,8 @@ namespace HarryPotterPotions.ViewModels
         public Command ButtonDeleteCommand { get; private set; }
         public Command SearchCommand { get; private set; }
 
+        public Command EditQuantityCommand { get; private set; }
+
         private string _searchText;
         public string SearchText
         {
@@ -31,8 +33,9 @@ namespace HarryPotterPotions.ViewModels
             set
             {
                 _searchText = value;
-                OnPropertyChanged();
-                SearchCommand.Execute(null); // Trigger the search command whenever the search text changes
+                OnPropertyChanged(nameof(SearchText));
+                SearchIngredientByNameAsync();
+                // Trigger the search command whenever the search text changes
                 //_sqlService.FindIngredientByNameWildcardAsync(_searchText);
             }
         }
@@ -60,6 +63,7 @@ namespace HarryPotterPotions.ViewModels
             ButtonRefreshCommand = new Command(async () => await SeeIngredientsAsync());
             ////ButtonRefreshCommand.CanExecute
             SearchCommand = new Command(async () => await SearchIngredientByNameAsync());
+            EditQuantityCommand = new Command<Ingredient>(async (ingredient) => await UpdateIngredientQuantityAsync(ingredient, ingredient.Quantity));
             ButtonSaveCommand = new Command(async () => await SaveIngredientAsync());
 
             ButtonDeleteCommand = new Command<Ingredient>(async (ingredient) => await RemoveIngredientAsync(ingredient));
@@ -67,6 +71,7 @@ namespace HarryPotterPotions.ViewModels
 
         public async Task SeeIngredientsAsync()
         {
+            SearchText = string.Empty; // Clear the search text when refreshing the inventory
             Inventory.Clear();
             var ingredients = await _sqlService.BrowseIngredientsAsync();
             foreach (var ingredient in ingredients)
@@ -118,6 +123,23 @@ namespace HarryPotterPotions.ViewModels
             {
                 Inventory.Remove(ingredient);
             }
+        }
+
+        public async Task UpdateIngredientQuantityAsync(Ingredient ingredient, int newQuantity)
+        {
+            int ingredientId = ingredient.ID;
+            newQuantity = ingredient.Quantity; // Assuming you want to use the updated quantity from the ingredient object
+            int result = await _sqlService.UpdateIngredientQuantityByIdAsync(ingredientId, newQuantity);
+            if (result == 0)
+                return;
+            if (result != 0)
+            {
+
+                //ingredient.Quantity = newQuantity;
+
+                OnPropertyChanged(nameof(Inventory)); // Notify that the Inventory collection has changed
+            }
+            SeeIngredientsAsync(); // Refresh the inventory to reflect the updated quantity
         }
 
     }
