@@ -6,9 +6,9 @@ namespace HarryPotterPotions.Models
 {
     public class Item
     {
-        Ingredient Ingredient { get; set; }
+        public Ingredient Ingredient { get; }
 
-        int Quantity { get; set; }
+        public int Quantity { get; set; }
 
         public Item(Ingredient ingredient, int quantity)
         {
