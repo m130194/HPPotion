@@ -18,7 +18,7 @@ namespace HarryPotterPotions.Views
         private async void OnGoToShoppingListClicked(object sender, EventArgs e)
         {
             //Navigation.PushAsync(new ShoppingListPage());
-            await Shell.Current.GoToAsync(nameof(ShoppingListPage));
+            await Shell.Current.GoToAsync("//" + nameof(ShoppingListPage));
             //Shell.Current.GoToAsync("ShoppingList");
 
         }

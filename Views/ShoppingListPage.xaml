@@ -53,7 +53,7 @@
                     
                     
                         <CheckBox Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="0" Grid.Row="0"/>
-                                <Label Text="{Binding .}" FontSize="30" VerticalOptions="Center" Grid.Column="1" Grid.Row="0"/>
+                                <Label Text="{Binding .}" VerticalOptions="Center" Grid.Column="1" Grid.Row="0"/>
                             <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" Grid.Column="2" Grid.Row="0"/>
                                 
 

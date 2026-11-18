@@ -8,7 +8,7 @@ namespace HarryPotterPotions
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-            Routing.RegisterRoute(nameof(ShoppingListPage), typeof(ShoppingListPage));
+            Routing.RegisterRoute("//" + nameof(ShoppingListPage), typeof(ShoppingListPage));
             Routing.RegisterRoute(nameof(IngredientInventoryPage), typeof(IngredientInventoryPage));
             Routing.RegisterRoute(nameof(PreferencesPage), typeof(PreferencesPage));
         }

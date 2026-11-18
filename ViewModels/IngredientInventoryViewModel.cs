@@ -57,7 +57,7 @@ namespace HarryPotterPotions.ViewModels
             _repository = repository;
 
             // this line needs to be looked at
-            _ = SeeIngredientsAsync();
+            SeeIngredientsAsync();
 
             ////initialize the command property in the constructor
             ButtonRefreshCommand = new Command(async () => await SeeIngredientsAsync());
@@ -71,7 +71,7 @@ namespace HarryPotterPotions.ViewModels
 
         public async Task SeeIngredientsAsync()
         {
-            SearchText = string.Empty; // Clear the search text when refreshing the inventory
+            //SearchText = string.Empty; // Clear the search text when refreshing the inventory
             Inventory.Clear();
             var ingredients = await _sqlService.BrowseIngredientsAsync();
             foreach (var ingredient in ingredients)
