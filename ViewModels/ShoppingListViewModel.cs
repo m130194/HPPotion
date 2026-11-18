@@ -26,7 +26,7 @@ namespace HarryPotterPotions.ViewModels
 
 
 
-        //public Command ButtonDeleteIngredientCommand { get; private set; }
+        //public Command ButtonAddIngredientCommand { get; private set; }
         //public Command ButtonAddIngredientToInventoryCommand { get; private set; }
 
 
@@ -35,7 +35,7 @@ namespace HarryPotterPotions.ViewModels
         {
             _repository = repository;
             _sqlService = SqlService;
-            //ButtonDeleteIngredientCommand = new Command<string>(RemoveIngredient);
+            //ButtonDeleteIngredientCommand = new Command<string>(AddIngredient);
             //ButtonAddIngredientToInventoryCommand = new Command<string>(async (ingredient) => await AddIngredientToInventoryAsync(ingredient));
         }
 
@@ -50,7 +50,7 @@ namespace HarryPotterPotions.ViewModels
             }
             else
             {
-                ShoppingCart.Add(new Item { Ingredient = ingredient.Name, Quantity = 1 });
+                ShoppingCart.Add(new Item { Ingredient = ingredient, Quantity = 1 });
             }
         }
 

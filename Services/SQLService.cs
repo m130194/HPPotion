@@ -78,7 +78,7 @@ namespace HarryPotterPotions.Services
             return await _connection.FindAsync<Ingredient>(i => i.Name == name);
         }
 
-        public async Task<List<Ingredient>> FindIngredientByNameWildcardAsync(string name)
+        public async Task<List<Ingredient>> FindItemByNameWildcardAsync(string name)
         {
             await InitAsync();
             var items = await _connection.QueryAsync<Ingredient>(

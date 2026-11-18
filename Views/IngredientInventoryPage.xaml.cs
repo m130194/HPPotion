@@ -6,7 +6,7 @@ using HarryPotterPotions.ViewModels;
 public partial class IngredientInventoryPage : ContentPage
 {
 
-    public IngredientInventoryPage(IngredientInventoryViewModel vm)
+    public IngredientInventoryPage(InventoryViewModel vm)
 	{
 		InitializeComponent();
         BindingContext = vm;

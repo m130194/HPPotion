@@ -25,7 +25,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <CollectionView ItemsSource="{Binding ShoppingList}">
+        <CollectionView ItemsSource="{Binding Ingredients}">
             <CollectionView.EmptyView>
                 <Label Text="No items in shopping list." />
             </CollectionView.EmptyView>
