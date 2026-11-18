@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HarryPotterPotions.Models
 {
-    class Item
+    public class Item
     {
         Ingredient Ingredient { get; set; }
 

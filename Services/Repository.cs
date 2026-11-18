@@ -14,15 +14,30 @@ namespace HarryPotterPotions.Services
         /// </summary>
         public ObservableCollection<Potion> SavedPotionsToMake { get; } = new();
 
-        public ObservableCollection<Ingredient> Inventory { get; } = new();
+        /// <summary>
+        /// Collection of items saved to the user's inventory. This collection is used to determine which ingredients the user already has and which ingredients they need to purchase for their potions.
+        /// </summary>
+        public ObservableCollection<Item> Inventory { get; } = new();
 
+        /// <summary>
+        /// "A list of all of the ingredients that my app knows about in a general form"
+        /// </summary>
+        public ObservableCollection<Ingredient> Ingredients { get; } = new();
+
+        
+        
+        //Methods for SavedPotionsToMake
         public void AddPotionToSavedPotionsToMake(Potion newPotion)
         {
             SavedPotionsToMake.Add(newPotion);
         }
-        public void AddIngredientToIngredientInventory(Ingredient newIngredient)
+
+
+
+        //Methods for Inventory
+        public void AddItemToInventory(Item newItem)
         {
-            Inventory.Add(newIngredient);
+            Inventory.Add(newItem);
         }
     }
 }
