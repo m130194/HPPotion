@@ -24,10 +24,13 @@ namespace HarryPotterPotions.ViewModels
 
         public ObservableCollection<Item> ShoppingCart => _repository.ShoppingCart;
 
+        public ObservableCollection<Item> Inventory => _repository.Inventory;
 
 
-        //public Command ButtonAddIngredientCommand { get; private set; }
-        //public Command ButtonAddIngredientToInventoryCommand { get; private set; }
+
+        public Command ButtonAddItemtoShoppingCartCommand { get; private set; }
+        public Command ButtonDeleteItemFromShoppingCartCommand { get; private set; }
+        public Command ButtonAddItemsToInventoryCommand { get; private set; }
 
 
 
@@ -35,13 +38,14 @@ namespace HarryPotterPotions.ViewModels
         {
             _repository = repository;
             _sqlService = SqlService;
-            //ButtonDeleteIngredientCommand = new Command<string>(AddIngredient);
-            //ButtonAddIngredientToInventoryCommand = new Command<string>(async (ingredient) => await AddIngredientToInventoryAsync(ingredient));
+            ButtonAddItemtoShoppingCartCommand = new Command<Ingredient>(AddItemToShoppingCart);
+            ButtonDeleteItemFromShoppingCartCommand = new Command<Item>(RemoveItemFromShoppingCart);
+            ButtonAddItemsToInventoryCommand = new Command<ObservableCollection<Item>>(AddItemsToInventory);
         }
 
         
 
-        public void AddIngredientToShoppingCart(Ingredient ingredient)
+        public void AddItemToShoppingCart(Ingredient ingredient)
         {
             var existingItem = ShoppingCart.FirstOrDefault(i => i.Ingredient == ingredient);
             if (existingItem != null)
@@ -50,16 +54,30 @@ namespace HarryPotterPotions.ViewModels
             }
             else
             {
-                ShoppingCart.Add(new Item { Ingredient = ingredient, Quantity = 1 });
+                Item newItem = new Item(ingredient, 1);
+                ShoppingCart.Add(newItem);
             }
         }
 
-
-
-
-        public void RemoveIngredientfromShoppingCart(Item item)
+        public void RemoveItemFromShoppingCart(Item item)
         {
             ShoppingCart.Remove(item);
+        }
+
+        public void AddItemsToInventory(ObservableCollection<Item> items)
+        {
+            foreach (var item in items)
+            {
+                var existingItem = Inventory.FirstOrDefault(i => i.Ingredient == item.Ingredient);
+                if (existingItem != null)
+                {
+                    existingItem.Quantity += item.Quantity;
+                }
+                else
+                {
+                    Inventory.Add(item);
+                }
+            }
         }
 
     }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HarryPotterPotions.Views.ShoppingListPage"
+             xmlns:viewmodel="clr-namespace:HarryPotterPotions.ViewModels"
+             xmlns:model="clr-namespace:HarryPotterPotions.Models"
+             x:DataType="viewmodel:ShoppingViewModel"
+             x:Name="ThisShoppingListPage"
+             Title="Shopping List">
+
+
+
+    <ScrollView>
+        <HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding SavedPotionsToMake}">
+                <CollectionView.EmptyView>
+                    <Label Text="No saved potions." />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Potion">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CollectionView ItemsSource="{Binding Ingredients}">
+                <CollectionView.EmptyView>
+                    <Label Text="No items in shopping list." />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Ingredient">
+                        <!--<SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonDeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Add to Inventory" BackgroundColor="Purple" Command="{Binding Source={x:Reference WhatsThisShoppingListPage}, Path=BindingContext.ButtonAddIngredientToInventoryCommand}" CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                    </SwipeView>-->
+                        <Grid RowDefinitions="*"
+      ColumnDefinitions="3*,*"
+      RowSpacing="10"
+      ColumnSpacing="10"
+      Margin="10"
+      Padding="10">
+
+
+
+                            <Button Text="Add to Cart" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemtoShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="1" Grid.Row="0"/>
+                            <Label Text="{Binding Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="0"/>
+
+
+
+
+                        </Grid>
+                        <!--</SwipeView-->
+
+
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+            <CollectionView ItemsSource="{Binding ShoppingCart}">
+                <CollectionView.EmptyView>
+                    <Label Text="No items in shopping cart." />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Item">
+                        <Grid RowDefinitions="*,50"
+ColumnDefinitions="3*,*,*,*"
+RowSpacing="10"
+ColumnSpacing="10"
+Margin="10"
+Padding="10">
+                            <Label Text="{Binding Ingredient.Name}" VerticalOptions="Center" Grid.Column="0"/>
+                            <Label Text="{Binding Quantity}" Grid.Column="1"/>
+                            <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteItemFromShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="3" Grid.Row="0"/>
+                            <Button Text="Add All To Inventory" BackgroundColor="Green" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemsToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="2" Grid.Row="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </HorizontalStackLayout>
+    </ScrollView>
+</ContentPage>

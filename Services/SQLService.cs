@@ -35,7 +35,7 @@ namespace HarryPotterPotions.Services
         }
 
         //Set up functionality - CRUD/BREAD operations
-        public async Task<List<Ingredient>> BrowseIngredientsAsync()
+        public async Task<List<Item>> BrowseItemsAsync()
         {
             await InitAsync();
             //query table
@@ -82,7 +82,7 @@ namespace HarryPotterPotions.Services
         {
             await InitAsync();
             var items = await _connection.QueryAsync<Item>(
-    "SELECT * FROM Ingredient WHERE Name LIKE ?",
+    "SELECT * FROM Item WHERE Name LIKE ?",
     $"%{name}%"
 );
             return items; // Return all matching items
@@ -96,7 +96,7 @@ namespace HarryPotterPotions.Services
             if (item != null)
             {
                 int rowsAffected = await _connection.ExecuteAsync(
-                    "UPDATE Ingredient SET Quantity = ? WHERE Name = ?",
+                    "UPDATE Item SET Quantity = ? WHERE Name = ?",
                     newQuantity,
                     name
                 );
@@ -108,7 +108,6 @@ namespace HarryPotterPotions.Services
         public async Task<int> UpdateItemQuantityByIdAsync(int id, int newQuantity)
         {
             await InitAsync();
-            //var ingredient = await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
             var result = await _connection.FindAsync<Item>(id);
             if (result != null)
             {

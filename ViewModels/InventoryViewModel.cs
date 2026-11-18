@@ -23,7 +23,6 @@ namespace HarryPotterPotions.ViewModels
         public Command ButtonSaveCommand { get; private set; }
         public Command ButtonDeleteCommand { get; private set; }
         public Command SearchCommand { get; private set; }
-
         public Command EditQuantityCommand { get; private set; }
 
         private string _searchText;
@@ -64,7 +63,7 @@ namespace HarryPotterPotions.ViewModels
             ////ButtonRefreshCommand.CanExecute
             SearchCommand = new Command(async () => await SearchItemByNameAsync());
             EditQuantityCommand = new Command<Item>(async (item) => await UpdateItemQuantityAsync(item, item.Quantity));
-            ButtonSaveCommand = new Command(async () => await SaveItemAsync());
+            ButtonSaveCommand = new Command<Item>(async (newItem) => await SaveItemAsync(newItem));
 
             ButtonDeleteCommand = new Command<Item>(async (item) => await RemoveItemAsync(item));
         }
@@ -96,15 +95,10 @@ namespace HarryPotterPotions.ViewModels
 
 
         //TODO: Add a method to save a new ingredient to the database and update the Inventory collection
-        public async Task SaveItemAsync()
+        public async Task SaveItemAsync(Item newItem)
         {
-            Item newItem = new()
-            {
-                Name = "New Item",
-                Quantity = 1
-            };
             Inventory.Add(newItem);
-            int result = await _sqlService.AddIngredientAsync(newItem);
+            int result = await _sqlService.AddItemAsync(newItem);
             if (result != 1)
             {
                 Inventory.Remove(newItem);
@@ -117,7 +111,7 @@ namespace HarryPotterPotions.ViewModels
             if (item == null)
                 return;
 
-            int result = await _sqlService.DeleteIngredientAsync(item);
+            int result = await _sqlService.DeleteItemAsync(item);
             if (result == 1)
             {
                 Inventory.Remove(item);
@@ -128,7 +122,7 @@ namespace HarryPotterPotions.ViewModels
         {
             int itemId = item.Id;
             newQuantity = item.Quantity; // Assuming you want to use the updated quantity from the item object
-            int result = await _sqlService.UpdateIngredientQuantityByIdAsync(itemId, newQuantity);
+            int result = await _sqlService.UpdateItemQuantityByIdAsync(itemId, newQuantity);
             if (result == 0)
                 return;
             if (result != 0)

@@ -12,9 +12,18 @@ namespace HarryPotterPotions.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
+        public int MarketPrice { get; set; }
+
         public Ingredient(string name)
         {
             Name = name;
         }
+
+        public Ingredient(string name, int marketPrice)
+        {
+            Name = name;
+            MarketPrice = marketPrice;
+        }
+
     }
 }

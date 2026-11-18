@@ -22,23 +22,36 @@ namespace HarryPotterPotions.Services
         /// <summary>
         /// "A list of all of the ingredients that my app knows about in a general form"
         /// </summary>
-        public ObservableCollection<Ingredient> Ingredients { get; } = new();
+        public ObservableCollection<Ingredient> Ingredients { get; } = new()
+        {
+            new Ingredient("Mandrake", 10),
+            new Ingredient("Bezoar", 20),
+            new Ingredient("Powdered Unicorn Horn", 15),
+            new Ingredient("Mistletoe berries", 5),
+            new Ingredient("Fire seeds", 25),
+            new Ingredient("Powdered Graphorn horn", 30),
+            new Ingredient("Billywig stings", 12),
+            new Ingredient("Chizpurfle carapaces", 8),
+            new Ingredient("Liquorice roots", 3),
+            new Ingredient("Castor oil", 7),
+            new Ingredient("Extract of Gurdyroot", 18)
+        };
 
         public Repository()
         {
             // Initialize the Ingredients collection with some sample ingredients
             Ingredients = [
-                new Ingredient("Mandrake"),
-            new Ingredient("Bezoar"),
-            new Ingredient("Powdered Unicorn Horn"),
-            new Ingredient("Mistletoe berries"),
-            new Ingredient("Fire seeds"),
-            new Ingredient("Powdered Graphorn horn"),
-            new Ingredient("Billywig stings"),
-            new Ingredient("Chizpurfle carapaces"),
-            new Ingredient("Liquorice roots"),
-            new Ingredient("Castor oil"),
-            new Ingredient("Extract of Gurdyroot")
+                new Ingredient("Mandrake", 10),
+            new Ingredient("Bezoar", 20),
+            new Ingredient("Powdered Unicorn Horn", 15),
+            new Ingredient("Mistletoe berries", 5),
+            new Ingredient("Fire seeds", 25),
+            new Ingredient("Powdered Graphorn horn", 30),
+            new Ingredient("Billywig stings", 12),
+            new Ingredient("Chizpurfle carapaces", 8),
+            new Ingredient("Liquorice roots", 3),
+            new Ingredient("Castor oil", 7),
+            new Ingredient("Extract of Gurdyroot", 18)
             ]
             ;
         }
