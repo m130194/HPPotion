@@ -22,9 +22,16 @@ namespace HarryPotterPotions.Services
         /// <summary>
         /// "A list of all of the ingredients that my app knows about in a general form"
         /// </summary>
-        public ObservableCollection<Ingredient> Ingredients { get; } = new();
+        public ObservableCollection<Ingredient> Ingredients { get; } = new(
+            new Ingredient("Gillyweed"),
+            new Ingredient("Dittany"),
+            new Ingredient("Dragon Heartstring"),
+            new Ingredient("Phoenix Feather"),
+            new Ingredient("Unicorn Hair"),
+            new Ingredient("Wolfsbane"),
+            new Ingredient("Mandrake Root"),
+            );
 
-        
         
         //Methods for SavedPotionsToMake
         public void AddPotionToSavedPotionsToMake(Potion newPotion)

@@ -8,7 +8,13 @@ namespace HarryPotterPotions.Models
     public class Ingredient
     {
         [PrimaryKey, AutoIncrement]
+
         public int ID { get; set; }
         public string Name { get; set; }
+
+        public Ingredient(string name)
+        {
+            Name = name;
+        }
     }
 }
