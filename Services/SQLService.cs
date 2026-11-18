@@ -23,14 +23,14 @@ namespace HarryPotterPotions.Services
             {
                 var databasePath =
                     Path.Combine(Environment.GetFolderPath(
-                        Environment.SpecialFolder.LocalApplicationData), "ingredients.db"
+                        Environment.SpecialFolder.LocalApplicationData), "items.db"
                     );
 
                 //pass in database path
                 _connection = new SQLiteAsyncConnection(databasePath);
 
                 //asynchronous set up database with generic type function inside constructor
-                _connection.CreateTableAsync<Ingredient>().Wait();
+                _connection.CreateTableAsync<Item>().Wait();
             }
         }
 
@@ -39,61 +39,61 @@ namespace HarryPotterPotions.Services
         {
             await InitAsync();
             //query table
-            return await _connection.Table<Ingredient>().ToListAsync();
+            return await _connection.Table<Item>().ToListAsync();
         }
 
-        public async Task<int> AddIngredientAsync(Ingredient ingredient)
+        public async Task<int> AddItemAsync(Item item)
         {
             await InitAsync();
-            return await _connection.InsertAsync(ingredient);
+            return await _connection.InsertAsync(item);
         }
 
-        public async Task<int> EditIngredientAsync(Ingredient ingredient)
+        public async Task<int> EditItemAsync(Item item)
         {
             await InitAsync();
-            return await _connection.UpdateAsync(ingredient);
+            return await _connection.UpdateAsync(item);
         }
 
-        public async Task<int> DeleteIngredientAsync(Ingredient ingredient)
+        public async Task<int> DeleteItemAsync(Item item)
         {
             await InitAsync();
-            return await _connection.DeleteAsync(ingredient);
+            return await _connection.DeleteAsync(item);
         }
 
-        public async Task<Ingredient> ReadIngredientAsync(int id)
+        public async Task<Item> ReadItemAsync(int id)
         {
             await InitAsync();
-            return await _connection.FindAsync<Ingredient>(id);
+            return await _connection.FindAsync<Item>(id);
         }
 
-        public async Task<Ingredient> ReadIngredientByNameAsync(string name)
+        public async Task<Item> ReadItemByNameAsync(string name)
         {
             await InitAsync();
-            return await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
+            return await _connection.Table<Item>().Where(i => i.Ingredient.Name == name).FirstOrDefaultAsync();
         }
 
-        public async Task<Ingredient> FindIngredientByNameAsync(string name)
+        public async Task<Item> FindItemByNameAsync(string name)
         {
             await InitAsync();
-            return await _connection.FindAsync<Ingredient>(i => i.Name == name);
+            return await _connection.FindAsync<Item>(i => i.Ingredient.Name == name);
         }
 
-        public async Task<List<Ingredient>> FindItemByNameWildcardAsync(string name)
+        public async Task<List<Item>> FindItemByNameWildcardAsync(string name)
         {
             await InitAsync();
-            var items = await _connection.QueryAsync<Ingredient>(
+            var items = await _connection.QueryAsync<Item>(
     "SELECT * FROM Ingredient WHERE Name LIKE ?",
     $"%{name}%"
 );
             return items; // Return all matching items
         }
 
-        public async Task<int> UpdateIngredientQuantityByNameAsync(string name, int newQuantity)
+        public async Task<int> UpdateItemQuantityByNameAsync(string name, int newQuantity)
         {
             await InitAsync();
 
-            var ingredient = await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
-            if (ingredient != null)
+            var item = await _connection.Table<Item>().Where(i => i.Ingredient.Name == name).FirstOrDefaultAsync();
+            if (item != null)
             {
                 int rowsAffected = await _connection.ExecuteAsync(
                     "UPDATE Ingredient SET Quantity = ? WHERE Name = ?",
@@ -102,23 +102,23 @@ namespace HarryPotterPotions.Services
                 );
                 return rowsAffected;
             }
-            return 0; // Return 0 if the ingredient was not found
+            return 0; // Return 0 if the item was not found
         }
 
-        public async Task<int> UpdateIngredientQuantityByIdAsync(int id, int newQuantity)
+        public async Task<int> UpdateItemQuantityByIdAsync(int id, int newQuantity)
         {
             await InitAsync();
             //var ingredient = await _connection.Table<Ingredient>().Where(i => i.Name == name).FirstOrDefaultAsync();
-            var result = await _connection.FindAsync<Ingredient>(id);
+            var result = await _connection.FindAsync<Item>(id);
             if (result != null)
             {
                 await _connection.ExecuteAsync(
-                    "UPDATE Ingredient SET Quantity = ? WHERE Id = ?",
+                    "UPDATE Item SET Quantity = ? WHERE Id = ?",
                     newQuantity,
                     id
                 );
             }
-            return 0; // Return 0 if the ingredient was not found
+            return 0; // Return 0 if the item was not found
         }
 
     }

@@ -13,7 +13,7 @@ namespace HarryPotterPotions.ViewModels
 {
 
 
-    public class ShoppingListViewModel
+    public class ShoppingViewModel
     {
 
         private readonly SQLService _sqlService;
@@ -31,7 +31,7 @@ namespace HarryPotterPotions.ViewModels
 
 
 
-        public ShoppingListViewModel(SQLService SqlService, Repository repository)
+        public ShoppingViewModel(SQLService SqlService, Repository repository)
         {
             _repository = repository;
             _sqlService = SqlService;

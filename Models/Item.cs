@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using SQLite;
 
 namespace HarryPotterPotions.Models
 {
     public class Item
     {
-        [Primary Key, AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public Ingredient Ingredient { get; set; }
 

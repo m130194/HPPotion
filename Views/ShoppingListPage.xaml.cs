@@ -7,7 +7,7 @@ namespace HarryPotterPotions.Views;
 public partial class ShoppingListPage : ContentPage
 {
     
-    public ShoppingListPage(ShoppingListViewModel vm)
+    public ShoppingListPage(ShoppingViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;
