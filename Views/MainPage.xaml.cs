@@ -19,7 +19,7 @@ namespace HarryPotterPotions.Views
         {
             //Navigation.PushAsync(new ShoppingListPage());
             await Shell.Current.GoToAsync("//" + nameof(ShoppingListPage));
-            //Shell.Current.GoToAsync("ShoppingList");
+            //Shell.Current.GoToAsync("ShoppingCart");
 
         }
     }
