@@ -53,8 +53,25 @@ namespace HarryPotterPotions.Services
 
         public void AddItemToShoppingCart(Ingredient ingredient)
         {
-            Item newItem = new Item(ingredient, 1);
-            ShoppingCart.Add(newItem);
+            List<string> currentIngredients = [];
+            foreach (Item item in ShoppingCart)
+            {
+                string ingredientName = item.Ingredient.Name;
+                currentIngredients.Add(ingredientName);
+            }
+            if (currentIngredients.Contains(ingredient.Name))
+            {
+                Item item = ShoppingCart.FirstOrDefault(item => item.Ingredient.Name == ingredient.Name);
+                //get the current item
+                //increment the quantity
+                item.Quantity++;
+            }
+            else
+            {
+                Item newItem = new Item(ingredient, 1);
+                ShoppingCart.Add(newItem);
+            }
+            
         }
 
         public void RemoveItemFromShoppingCart(Item item)
