@@ -30,7 +30,8 @@ namespace HarryPotterPotions.ViewModels
 
         public Command ButtonAddItemtoShoppingCartCommand { get; private set; }
         public Command ButtonDeleteItemFromShoppingCartCommand { get; private set; }
-        public Command ButtonAddItemsToInventoryCommand { get; private set; }
+        
+        //public Command ButtonAddItemsToInventoryCommand { get; private set; }
 
 
 
@@ -40,7 +41,8 @@ namespace HarryPotterPotions.ViewModels
             _sqlService = SqlService;
             ButtonAddItemtoShoppingCartCommand = new Command<Item>(AddItemToShoppingCart);
             ButtonDeleteItemFromShoppingCartCommand = new Command<Item>(RemoveItemFromShoppingCart);
-            ButtonAddItemsToInventoryCommand = new Command<ObservableCollection<Item>>(AddItemsToInventory);
+            
+            //ButtonAddItemsToInventoryCommand = new Command<ObservableCollection<Item>>(AddItemsToInventory);
         }
 
         

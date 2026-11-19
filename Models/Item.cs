@@ -12,7 +12,7 @@ namespace HarryPotterPotions.Models
         public int Id { get; set; }
         public Ingredient Ingredient { get; set; } //how to fix errors with being readonly
 
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } = 1;
 
         public int TotalPrice
         {
@@ -23,7 +23,7 @@ namespace HarryPotterPotions.Models
         // Created parameterless constructor due to SQLite's requirement for a default constructor when using the ORM. This allows SQLite to create instances of the Item class when retrieving data from the database.
         public Item()
         {
-            Quantity = 1;
+            
         }
 
         public Item(Ingredient ingredient, int quantity)
