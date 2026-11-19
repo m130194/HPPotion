@@ -35,10 +35,10 @@ namespace HarryPotterPotions.ViewModels
 
 
 
-        public ShoppingViewModel(SQLService SqlService, Repository repository)
+        public ShoppingViewModel(SQLService sqlService, Repository repository)
         {
             _repository = repository;
-            _sqlService = SqlService;
+            _sqlService = sqlService;
             ButtonAddItemtoShoppingCartCommand = new Command<Item>(AddItemToShoppingCart);
             ButtonDeleteItemFromShoppingCartCommand = new Command<Item>(RemoveItemFromShoppingCart);
             
@@ -49,12 +49,13 @@ namespace HarryPotterPotions.ViewModels
 
         public void AddItemToShoppingCart(Item newItem)
         {
-           ShoppingCart.Add(newItem);
+           _repository.AddItemToShoppingCart(newItem);
         }
+
 
         public void RemoveItemFromShoppingCart(Item item)
         {
-            ShoppingCart.Remove(item);
+            _repository.RemoveItemFromShoppingCart(item);
         }
 
 

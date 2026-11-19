@@ -14,6 +14,7 @@ namespace HarryPotterPotions.Models
 
         public int Quantity { get; set; } = 1;
 
+        //This is a placeholder for a future feature where the user can specify a custom price for an ingredient in their inventory. For now, it will default to the market price of the ingredient.
         public int TotalPrice
         {
             get => Ingredient.MarketPrice * Quantity;
