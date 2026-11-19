@@ -53,7 +53,8 @@ namespace HarryPotterPotions.Services
 
         public void AddItemToShoppingCart(Ingredient ingredient)
         {
-            ShoppingCart.Add(ingredient); //error message: cannot convert from 'HarryPotterPotions.Models.Ingredient' to 'HarryPotterPotions.Models.Item'
+            Item newItem = new Item(ingredient, 1);
+            ShoppingCart.Add(newItem);
         }
 
         public void RemoveItemFromShoppingCart(Item item)

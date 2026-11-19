@@ -18,16 +18,17 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Ingredient">
 
-                        <Grid RowDefinitions="*"
-                                ColumnDefinitions="3*,*"
+                        <Grid RowDefinitions="50,*"
+                                ColumnDefinitions="3*,*,*"
                                 RowSpacing="10"
                                 ColumnSpacing="10"
                                 Margin="10"
                                 Padding="10">
-
-
-                            <Button Text="Add to Cart" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemtoShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="1" Grid.Row="0"/>
-                            <Label Text="{Binding Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="0"/>
+                            
+                            <Label Text="{Binding Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="1"/>
+                            <Label Text="{Binding MarketPrice}" Grid.Column="1" Grid.Row="1" />
+                            <Button Text="Add to Cart" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.HandleIngredientClickedAddCommand}" CommandParameter="{Binding .}" Grid.Column="1" Grid.Row="1"/>
+                            
 
                         </Grid>
 
@@ -46,17 +47,17 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Item">
-                        <Grid RowDefinitions="*,50"
+                        <Grid RowDefinitions="50,*,50"
                                 ColumnDefinitions="3*,*,*,*"
                                 RowSpacing="10"
                                 ColumnSpacing="10"
                                 Margin="10"
                                 Padding="10">
                             
-                            <Label Text="{Binding Ingredient.Name}" VerticalOptions="Center" Grid.Column="0"/>
-                            <Label Text="{Binding Quantity}" Grid.Column="1"/>
-                            <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteItemFromShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="3" Grid.Row="0"/>
-                            <Button Text="Add All To Inventory" BackgroundColor="Green" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemsToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="2" Grid.Row="1"/>
+                            <Label Text="{Binding Ingredient.Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="1"/>
+                            <Label Text="{Binding Quantity}" Grid.Column="1" Grid.Row="1"/>
+                            <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteItemFromShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="3" Grid.Row="1"/>
+                            <Button Text="Add All To Inventory" BackgroundColor="Green" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemsToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="2" Grid.Row="2"/>
                         
                         </Grid>
                     </DataTemplate>
