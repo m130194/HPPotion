@@ -38,25 +38,16 @@ namespace HarryPotterPotions.ViewModels
         {
             _repository = repository;
             _sqlService = SqlService;
-            ButtonAddItemtoShoppingCartCommand = new Command<Ingredient>(AddItemToShoppingCart);
+            ButtonAddItemtoShoppingCartCommand = new Command<Item>(AddItemToShoppingCart);
             ButtonDeleteItemFromShoppingCartCommand = new Command<Item>(RemoveItemFromShoppingCart);
             ButtonAddItemsToInventoryCommand = new Command<ObservableCollection<Item>>(AddItemsToInventory);
         }
 
         
 
-        public void AddItemToShoppingCart(Ingredient ingredient)
+        public void AddItemToShoppingCart(Item newItem)
         {
-            var existingItem = ShoppingCart.FirstOrDefault(i => i.Ingredient == ingredient);
-            if (existingItem != null)
-            {
-                existingItem.Quantity++;
-            }
-            else
-            {
-                Item newItem = new Item(ingredient, 1);
-                ShoppingCart.Add(newItem);
-            }
+           ShoppingCart.Add(newItem);
         }
 
         public void RemoveItemFromShoppingCart(Item item)
@@ -64,21 +55,27 @@ namespace HarryPotterPotions.ViewModels
             ShoppingCart.Remove(item);
         }
 
-        public void AddItemsToInventory(ObservableCollection<Item> items)
-        {
-            foreach (var item in items)
-            {
-                var existingItem = Inventory.FirstOrDefault(i => i.Ingredient == item.Ingredient);
-                if (existingItem != null)
-                {
-                    existingItem.Quantity += item.Quantity;
-                }
-                else
-                {
-                    Inventory.Add(item);
-                }
-            }
-        }
+
+
+
+
+
+
+        //public void AddItemsToInventory(ObservableCollection<Item> items)
+        //{
+        //    foreach (var item in items)
+        //    {
+        //        var existingItem = Inventory.FirstOrDefault(i => i.Ingredient == item.Ingredient);
+        //        if (existingItem != null)
+        //        {
+        //            existingItem.Quantity += item.Quantity;
+        //        }
+        //        else
+        //        {
+        //            Inventory.Add(item);
+        //        }
+        //    }
+        //}
 
     }
 }
