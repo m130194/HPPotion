@@ -1,12 +1,14 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using SQLite;
 
 namespace HarryPotterPotions.Models
 {
-    public class Item
+    public class Item: INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -19,6 +21,18 @@ namespace HarryPotterPotions.Models
         {
             get => Ingredient.MarketPrice * Quantity;
         }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(
+            [CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(propertyName));
+        }
+
 
 
         // Created parameterless constructor due to SQLite's requirement for a default constructor when using the ORM. This allows SQLite to create instances of the Item class when retrieving data from the database.

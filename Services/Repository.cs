@@ -55,21 +55,11 @@ namespace HarryPotterPotions.Services
         public void AddItemToShoppingCart(Ingredient ingredient)
         {
 
-            Item itemToChange;
+            Item item = ShoppingCart.FirstOrDefault(item => item.Ingredient == ingredient);
 
-            foreach (Item item in ShoppingCart)
-            {
-                if (item.Ingredient == ingredient)
-                {
-                    itemToChange = item;
-                    break;
-                }
-            }
-
-            if (itemToChange != null)
+            if (item is not null)
             {
                 int index = ShoppingCart.IndexOf(item);
-
                 // now remove the item
                 ShoppingCart.RemoveAt(index);
 
@@ -78,6 +68,7 @@ namespace HarryPotterPotions.Services
 
                 // now add it back in (adding will make sure an event is fired)
                 ShoppingCart.Insert(index, item);
+
             }
             else
             {
