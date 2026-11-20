@@ -57,7 +57,7 @@
                             <Label Text="{Binding Ingredient.Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="0"/>
                             <Label Text="{Binding Quantity}" Grid.Column="1" Grid.Row="0"/>
                             <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteItemFromShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="3" Grid.Row="0"/>
-                            <Button Text="Add All To Inventory" BackgroundColor="Green" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemsToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="0" Grid.Row="1"/>
+                            <!--<Button Text="Add All To Inventory" BackgroundColor="Green" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemsToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="0" Grid.Row="1"/>-->
                         
                         </Grid>
                     </DataTemplate>
