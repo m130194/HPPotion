@@ -19,12 +19,14 @@ namespace HarryPotterPotions.ViewModels
         private readonly SQLService _sqlService;
         private readonly Repository _repository;
 
-        public ObservableCollection<Ingredient> Ingredients =>
+        public List<Ingredient> Ingredients =>
             _repository.Ingredients;
 
         public ObservableCollection<Item> ShoppingCart => _repository.ShoppingCart;
 
         public ObservableCollection<Item> Inventory => _repository.Inventory;
+
+        public int TotalCartPrice => _repository.TotalCartPrice;
 
 
 

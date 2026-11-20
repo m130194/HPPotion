@@ -2,13 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 
 
 namespace HarryPotterPotions.Services
 {
-    public class Repository
+    public class Repository : INotifyPropertyChanged
     {
         /// <summary>
         /// Gets the collection of saved potions that the user wants to make. This collection is used to generate the shopping list of ingredients needed for those potions.
@@ -23,15 +25,31 @@ namespace HarryPotterPotions.Services
         /// <summary>
         /// "A list of all of the ingredients that my app knows about in a general form"
         /// </summary>
-        public ObservableCollection<Ingredient> Ingredients { get; } = new();
+        public List<Ingredient> Ingredients { get; } = new();
 
+        /// <summary>
+        /// A collection representing the user's shopping cart
+        /// </summary>
         public ObservableCollection<Item> ShoppingCart { get; } = new();
 
+        public int TotalCartPrice => ShoppingCart.Sum(item => item.TotalPrice);
+        //public int TotalCartPrice
+        //{
+        //    get
+        //    {
+        //        int totalPrice = 0;
+        //        foreach (Item item in ShoppingCart)
+        //        {
+        //            totalPrice += item.TotalPrice;
+        //        }
+        //        return totalPrice;
+        //    }
+        //}
 
         public Repository()
         {
             // Initialize the Ingredients collection with some sample ingredients
-            Ingredients = new ObservableCollection<Ingredient>()
+            Ingredients = new List<Ingredient>()
             {
                 new Ingredient("Mandrake", 10),
                 new Ingredient("Bezoar", 20),
@@ -59,16 +77,7 @@ namespace HarryPotterPotions.Services
 
             if (item is not null)
             {
-                int index = ShoppingCart.IndexOf(item);
-                // now remove the item
-                ShoppingCart.RemoveAt(index);
-
-                // now it's removed make the change
                 item.Quantity++;
-
-                // now add it back in (adding will make sure an event is fired)
-                ShoppingCart.Insert(index, item);
-
             }
             else
             {
@@ -129,6 +138,16 @@ namespace HarryPotterPotions.Services
         public void AddItemToInventory(Item newItem)
         {
             Inventory.Add(newItem);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(
+            [CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(propertyName));
         }
     }
 }

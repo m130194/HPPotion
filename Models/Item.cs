@@ -12,14 +12,30 @@ namespace HarryPotterPotions.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public Ingredient Ingredient { get; set; } //how to fix errors with being readonly
+        public Ingredient Ingredient { get; set; } //how to fix errors with being readonly?
 
-        public int Quantity { get; set; }
+        private int _quantity;
+        public int Quantity
+        {
+            get => _quantity;
+            set
+            {
+                if (_quantity != value)
+                {
+                    _quantity = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TotalPrice));
+                }
+            }
+        }
 
         //This is a placeholder for a future feature where the user can specify a custom price for an ingredient in their inventory. For now, it will default to the market price of the ingredient.
+
+
         public int TotalPrice
         {
             get => Ingredient.MarketPrice * Quantity;
+
         }
 
 

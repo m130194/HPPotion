@@ -9,9 +9,10 @@
              Title="Shopping List">
 
     <ScrollView>
-        <HorizontalStackLayout>
-
-            <CollectionView ItemsSource="{Binding Ingredients}">
+        <Grid RowDefinitions="50,*,100"
+            ColumnDefinitions="*,*">
+<Label Text="Ingredients Available to Buy" Grid.Column="0" Grid.Row="0"/>
+            <CollectionView ItemsSource="{Binding Ingredients}" Grid.Column="0" Grid.Row="1">
                 <CollectionView.EmptyView>
                     <Label Text="No items in shopping list." />
                 </CollectionView.EmptyView>
@@ -40,15 +41,15 @@
             </CollectionView>
 
 
-
-            <CollectionView ItemsSource="{Binding ShoppingCart}">
+<Label Text="Shopping Cart" Grid.Column="1" Grid.Row="0"/>
+            <CollectionView ItemsSource="{Binding ShoppingCart}" Grid.Column="1" Grid.Row="1">
                 <CollectionView.EmptyView>
                     <Label Text="No items in shopping cart." />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Item">
                         <Grid RowDefinitions="*,50"
-                                ColumnDefinitions="*,50,100"
+                                ColumnDefinitions="*,50,80,100"
                                 RowSpacing="10"
                                 ColumnSpacing="10"
                                 Margin="10"
@@ -56,6 +57,7 @@
                             
                             <Label Text="{Binding Ingredient.Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="0"/>
                             <Label Text="{Binding Quantity}" Grid.Column="1" Grid.Row="0"/>
+                            <Label Text="{Binding TotalPrice, StringFormat='$ {0:F2}'}" Grid.Column="2" Grid.Row="0"/>
                             <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteItemFromShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="3" Grid.Row="0"/>
                             <!--<Button Text="Add All To Inventory" BackgroundColor="Green" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemsToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="0" Grid.Row="1"/>-->
                         
@@ -63,7 +65,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-        </HorizontalStackLayout>
+<Label Text="{Binding TotalCartPrice, StringFormat='$ {0:F2}'}" Grid.Column="1" Grid.Row="3"/>
+        </Grid>
     </ScrollView>
 </ContentPage>
