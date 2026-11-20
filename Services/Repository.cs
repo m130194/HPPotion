@@ -54,37 +54,6 @@ namespace HarryPotterPotions.Services
 
         public void AddItemToShoppingCart(Ingredient ingredient)
         {
-            //List<string> currentIngredients = [];
-            //foreach (Item item in ShoppingCart)
-            //{
-            //    string ingredientName = item.Ingredient.Name;
-            //    currentIngredients.Add(ingredientName);
-            //}
-            //if (currentIngredients.Contains(ingredient.Name))
-            //{
-            //    Item item = ShoppingCart.FirstOrDefault(item => item.Ingredient.Name == ingredient.Name);
-            //    //get the current item
-                
-            //    //increment the quantity
-            //    //item.Quantity++;
-
-            //    // get the index of where the item currently is
-            //    int index = ShoppingCart.IndexOf(item);
-
-            //    // now remove the item
-            //    ShoppingCart.RemoveAt(index);
-
-            //    // now it's removed make the change
-            //    item.Quantity++;
-
-            //    // now add it back in (adding will make sure an event is fired)
-            //    ShoppingCart.Insert(index, item);
-            //}
-            //else
-            //{
-            //    Item newItem = new Item(ingredient, 1);
-            //    ShoppingCart.Add(newItem);
-            //}
 
             Item itemToChange;
 
@@ -116,6 +85,38 @@ namespace HarryPotterPotions.Services
                 ShoppingCart.Add(newItem);
             }
 
+
+            //List<string> currentIngredients = [];
+            //foreach (Item item in ShoppingCart)
+            //{
+            //    string ingredientName = item.Ingredient.Name;
+            //    currentIngredients.Add(ingredientName);
+            //}
+            //if (currentIngredients.Contains(ingredient.Name))
+            //{
+            //    Item item = ShoppingCart.FirstOrDefault(item => item.Ingredient.Name == ingredient.Name);
+            //    //get the current item
+
+            //    //increment the quantity
+            //    //item.Quantity++;
+
+            //    // get the index of where the item currently is
+            //    int index = ShoppingCart.IndexOf(item);
+
+            //    // now remove the item
+            //    ShoppingCart.RemoveAt(index);
+
+            //    // now it's removed make the change
+            //    item.Quantity++;
+
+            //    // now add it back in (adding will make sure an event is fired)
+            //    ShoppingCart.Insert(index, item);
+            //}
+            //else
+            //{
+            //    Item newItem = new Item(ingredient, 1);
+            //    ShoppingCart.Add(newItem);
+            //}
         }
 
         public void RemoveItemFromShoppingCart(Item item)
