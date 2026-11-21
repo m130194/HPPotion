@@ -27,7 +27,7 @@
                                 Padding="10">
                             
                             <Label Text="{Binding Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="1"/>
-                            <Label Text="{Binding MarketPrice, StringFormat='$ {0:F2}'}" Grid.Column="1" Grid.Row="1" />
+                            <Label Text="{Binding IngredientPrice, StringFormat='$ {0:F2}'}" Grid.Column="1" Grid.Row="1" />
                             <Button Text="Add to Cart" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.HandleIngredientClickedAddCommand}" CommandParameter="{Binding .}" Grid.Column="2" Grid.Row="1"/>
                             
 
@@ -57,7 +57,7 @@
                             
                             <Label Text="{Binding Ingredient.Name}" VerticalOptions="Center" Grid.Column="0" Grid.Row="0"/>
                             <Label Text="{Binding Quantity}" Grid.Column="1" Grid.Row="0"/>
-                            <Label Text="{Binding TotalPrice, StringFormat='$ {0:F2}'}" Grid.Column="2" Grid.Row="0"/>
+                            <Label Text="{Binding ItemPrice, StringFormat='$ {0:F2}'}" Grid.Column="2" Grid.Row="0"/>
                             <Button Text="Delete" BackgroundColor="Red" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonDeleteItemFromShoppingCartCommand}" CommandParameter="{Binding .}" Grid.Column="3" Grid.Row="0"/>
                             <!--<Button Text="Add All To Inventory" BackgroundColor="Green" Command="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.ButtonAddItemsToInventoryCommand}" CommandParameter="{Binding .}" Grid.Column="0" Grid.Row="1"/>-->
                         
@@ -65,7 +65,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-<Label Text="{Binding TotalCartPrice, StringFormat='$ {0:F2}'}" Grid.Column="1" Grid.Row="3"/>
+<Label Text="{Binding Source={x:Reference ThisShoppingListPage}, Path=BindingContext.TotalCartPrice, StringFormat='$ {0:F2}'}" Grid.Column="1" Grid.Row="3"/>
         </Grid>
     </ScrollView>
 </ContentPage>

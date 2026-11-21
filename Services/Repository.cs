@@ -32,7 +32,7 @@ namespace HarryPotterPotions.Services
         /// </summary>
         public ObservableCollection<Item> ShoppingCart { get; } = new();
 
-        public int TotalCartPrice
+        public int TotalCartPrice //this is the code in question
         {
             get
             {
@@ -45,20 +45,20 @@ namespace HarryPotterPotions.Services
             }
         }
 
-        private Cart _userCart;
-        public Cart UserCart
-        {
-            get => _userCart;
-            set
-            {
-                if (_userCart != value)
-                {
-                    _userCart = value;
-                    OnPropertyChanged();
-                    OnPropertyChanged(nameof(TotalCartPrice));
-                }
-            }
-        }
+        ////TODO: future implementation of a Cart class to manage the shopping cart and its total price
+        //private Cart _userCart;
+        //public Cart UserCart
+        //{
+        //    get => _userCart;
+        //    set
+        //    {
+        //        if (_userCart != value)
+        //        {
+        //            _userCart = value;
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //}
 
         public Repository()
         {
@@ -78,8 +78,13 @@ namespace HarryPotterPotions.Services
                 new Ingredient("Extract of Gurdyroot", 18)
             };
 
+
+            ShoppingCart.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalCartPrice)); //this is the code in question
+
+
+            //TODO: future implementation of a Cart class to manage the shopping cart and its total price
             //Create Cart instance in constructor of Repository
-            UserCart = new Cart(Ingredients, ShoppingCart);
+            //UserCart = new Cart(Ingredients);
         }
 
 
@@ -100,39 +105,6 @@ namespace HarryPotterPotions.Services
                 Item newItem = new Item(ingredient, 1);
                 ShoppingCart.Add(newItem);
             }
-
-
-            //List<string> currentIngredients = [];
-            //foreach (Item item in ShoppingCart)
-            //{
-            //    string ingredientName = item.Ingredient.Name;
-            //    currentIngredients.Add(ingredientName);
-            //}
-            //if (currentIngredients.Contains(ingredient.Name))
-            //{
-            //    Item item = ShoppingCart.FirstOrDefault(item => item.Ingredient.Name == ingredient.Name);
-            //    //get the current item
-
-            //    //increment the quantity
-            //    //item.Quantity++;
-
-            //    // get the index of where the item currently is
-            //    int index = ShoppingCart.IndexOf(item);
-
-            //    // now remove the item
-            //    ShoppingCart.RemoveAt(index);
-
-            //    // now it's removed make the change
-            //    item.Quantity++;
-
-            //    // now add it back in (adding will make sure an event is fired)
-            //    ShoppingCart.Insert(index, item);
-            //}
-            //else
-            //{
-            //    Item newItem = new Item(ingredient, 1);
-            //    ShoppingCart.Add(newItem);
-            //}
         }
 
         public void RemoveItemFromShoppingCart(Item item)

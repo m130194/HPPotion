@@ -23,8 +23,9 @@ namespace HarryPotterPotions.Models
                 if (_quantity != value)
                 {
                     _quantity = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Quantity));
                     OnPropertyChanged(nameof(ItemPrice));
+                    
                 }
             }
         }
@@ -39,15 +40,7 @@ namespace HarryPotterPotions.Models
         }
 
 
-        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged(
-            [CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(
-                this,
-                new PropertyChangedEventArgs(propertyName));
-        }
 
 
 
@@ -63,5 +56,18 @@ namespace HarryPotterPotions.Models
             Quantity = quantity;
         }
 
+
+
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(
+            [CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

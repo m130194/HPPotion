@@ -7,7 +7,7 @@ namespace HarryPotterPotions.Models
 {
     public class Cart
     {
-        public ObservableCollection<Item> CartItems { get; set; } //should this be here on in the Repository class? Intellisense thinks it should be here because the Cart class is responsible for managing the items in the cart, while the Repository class is responsible for managing the data and business logic of the application.
+        public ObservableCollection<Item> CartItems { get; set; } = new(); //should this be here on in the Repository class? Intellisense thinks it should be here because the Cart class is responsible for managing the items in the cart, while the Repository class is responsible for managing the data and business logic of the application.
 
         public List<Ingredient> Ingredients { get; set; }
         public int TotalCartPrice
@@ -28,10 +28,9 @@ namespace HarryPotterPotions.Models
 
         }
 
-        public Cart(List<Ingredient> ingredients, ObservableCollection<Item> cartItems)
+        public Cart(List<Ingredient> ingredients)
         {
             Ingredients = ingredients;
-            CartItems = cartItems;
         }
     }
 }

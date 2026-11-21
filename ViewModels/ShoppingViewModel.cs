@@ -3,7 +3,9 @@ using HarryPotterPotions.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -13,7 +15,7 @@ namespace HarryPotterPotions.ViewModels
 {
 
 
-    public class ShoppingViewModel
+    public class ShoppingViewModel : INotifyPropertyChanged
     {
 
         private readonly SQLService _sqlService;
@@ -26,7 +28,20 @@ namespace HarryPotterPotions.ViewModels
 
         public ObservableCollection<Item> Inventory => _repository.Inventory;
 
-        public int TotalCartPrice => _repository.UserCart.TotalCartPrice;
+        //public int TotalCartPrice => _repository.TotalCartPrice;
+
+        public int TotalCartPrice
+        {
+            get
+            {
+                int totalPrice = 0;
+                foreach (Item item in ShoppingCart)
+                {
+                    totalPrice += item.ItemPrice;
+                }
+                return totalPrice;
+            }
+        }
 
 
 
@@ -43,8 +58,10 @@ namespace HarryPotterPotions.ViewModels
             _sqlService = sqlService;
             HandleIngredientClickedAddCommand = new Command<Ingredient>(AddItemToShoppingCart);
             ButtonDeleteItemFromShoppingCartCommand = new Command<Item>(RemoveItemFromShoppingCart);
-            
+
             //ButtonAddItemsToInventoryCommand = new Command<ObservableCollection<Item>>(AddItemsToInventory);
+
+            ShoppingCart.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalCartPrice));
         }
 
         
@@ -82,5 +99,15 @@ namespace HarryPotterPotions.ViewModels
         //    }
         //}
 
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(
+            [CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
