@@ -44,16 +44,16 @@ namespace HarryPotterPotions.ViewModels
         //    }
         //}
 
-        private int _totalPrice;
+        private int _totalCartPrice;
 
-        public int TotalPrice
+        public int TotalCartPrice
         {
-            get => _totalPrice;
+            get => _totalCartPrice;
             set
             {
-                if (_totalPrice != value)
+                if (_totalCartPrice != value)
                 {
-                    _totalPrice = value;
+                    _totalCartPrice = value;
                     OnPropertyChanged();
                 }
             }
@@ -68,11 +68,16 @@ namespace HarryPotterPotions.ViewModels
 
 
 
-        private void OnShoppingCartChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            // This method runs whenever items are added, removed, moved, or cleared
-            CalculateTotalPriceShoppingCart();
-        }
+
+
+        //private void OnShoppingCartChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    // This method runs whenever items are added, removed, moved, or cleared
+        //    CalculateTotalPriceShoppingCart();
+        //}
+
+
+
 
         private void CalculateTotalPriceShoppingCart()
         {
@@ -82,8 +87,44 @@ namespace HarryPotterPotions.ViewModels
             {
                 totalPrice += item.ItemPrice;
             }
-            TotalPrice = totalPrice;
+            TotalCartPrice = totalPrice;
         }
+
+
+        private void OnShoppingCartChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (Item item in e.OldItems)
+                    item.PropertyChanged -= OnItemPropertyChanged;
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (Item item in e.NewItems)
+                    item.PropertyChanged += OnItemPropertyChanged;
+            }
+
+            OnPropertyChanged(nameof(TotalCartPrice));
+        }
+
+        private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Item.Quantity))
+            {
+                CalculateTotalPriceShoppingCart();
+                OnPropertyChanged(nameof(TotalCartPrice));
+            }
+        }
+
+
+
+
+
+
+
+
+
 
         public ShoppingViewModel(SQLService sqlService, Repository repository)
         {
@@ -96,7 +137,7 @@ namespace HarryPotterPotions.ViewModels
 
             //ShoppingCart.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalCartPrice));
 
-            ShoppingCart.CollectionChanged += OnItemsCollectionChanged;
+            ShoppingCart.CollectionChanged += OnShoppingCartChanged;
         }
 
         
