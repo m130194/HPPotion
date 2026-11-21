@@ -3,6 +3,7 @@ using HarryPotterPotions.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -30,16 +31,31 @@ namespace HarryPotterPotions.ViewModels
 
         //public int TotalCartPrice => _repository.TotalCartPrice;
 
-        public int TotalCartPrice
+        //public int TotalCartPrice
+        //{
+        //    get
+        //    {
+        //        int totalPrice = 0;
+        //        foreach (Item item in ShoppingCart)
+        //        {
+        //            totalPrice += item.ItemPrice;
+        //        }
+        //        return totalPrice;
+        //    }
+        //}
+
+        private int _totalPrice;
+
+        public int TotalPrice
         {
-            get
+            get => _totalPrice;
+            set
             {
-                int totalPrice = 0;
-                foreach (Item item in ShoppingCart)
+                if (_totalPrice != value)
                 {
-                    totalPrice += item.ItemPrice;
+                    _totalPrice = value;
+                    OnPropertyChanged();
                 }
-                return totalPrice;
             }
         }
 
@@ -47,10 +63,27 @@ namespace HarryPotterPotions.ViewModels
 
         public Command HandleIngredientClickedAddCommand { get; private set; }
         public Command ButtonDeleteItemFromShoppingCartCommand { get; private set; }
-        
+
         //public Command ButtonAddItemsToInventoryCommand { get; private set; }
 
 
+
+        private void OnShoppingCartChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            // This method runs whenever items are added, removed, moved, or cleared
+            CalculateTotalPriceShoppingCart();
+        }
+
+        private void CalculateTotalPriceShoppingCart()
+        {
+            // add the code here which calculates the shopping cart total price
+            int totalPrice = 0;
+            foreach (Item item in ShoppingCart)
+            {
+                totalPrice += item.ItemPrice;
+            }
+            TotalPrice = totalPrice;
+        }
 
         public ShoppingViewModel(SQLService sqlService, Repository repository)
         {
@@ -61,7 +94,9 @@ namespace HarryPotterPotions.ViewModels
 
             //ButtonAddItemsToInventoryCommand = new Command<ObservableCollection<Item>>(AddItemsToInventory);
 
-            ShoppingCart.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalCartPrice));
+            //ShoppingCart.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalCartPrice));
+
+            ShoppingCart.CollectionChanged += OnItemsCollectionChanged;
         }
 
         
