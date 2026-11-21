@@ -26,7 +26,7 @@ namespace HarryPotterPotions.ViewModels
 
         public ObservableCollection<Item> Inventory => _repository.Inventory;
 
-        public int TotalCartPrice => _repository.TotalCartPrice;
+        public int TotalCartPrice => _repository.UserCart.TotalCartPrice;
 
 
 

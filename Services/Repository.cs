@@ -32,20 +32,20 @@ namespace HarryPotterPotions.Services
         /// </summary>
         public ObservableCollection<Item> ShoppingCart { get; } = new();
 
-        public int TotalCartPrice => ShoppingCart.Sum(item => item.TotalPrice);
-        //public int TotalCartPrice
-        //{
-        //    get
-        //    {
-        //        int totalPrice = 0;
-        //        foreach (Item item in ShoppingCart)
-        //        {
-        //            totalPrice += item.TotalPrice;
-        //        }
-        //        return totalPrice;
-        //    }
-        //}
+        public int TotalCartPrice
+        {
+            get
+            {
+                int totalPrice = 0;
+                foreach (Item item in ShoppingCart)
+                {
+                    totalPrice += item.TotalPrice;
+                }
+                return totalPrice;
+            }
+        }
 
+        public Cart UserCart;
         public Repository()
         {
             // Initialize the Ingredients collection with some sample ingredients
@@ -62,8 +62,10 @@ namespace HarryPotterPotions.Services
                 new Ingredient("Liquorice roots", 3),
                 new Ingredient("Castor oil", 7),
                 new Ingredient("Extract of Gurdyroot", 18)
-            }
-            ;
+            };
+
+            //Create Cart instance in constructor of Repository
+            UserCart = new Cart(Ingredients);
         }
 
 
