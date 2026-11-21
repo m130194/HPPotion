@@ -17,7 +17,7 @@ namespace HarryPotterPotions.Models
                 int totalPrice = 0;
                 foreach (Item item in CartItems)
                 {
-                    totalPrice += item.TotalPrice;
+                    totalPrice += item.ItemPrice;
                 }
                 return totalPrice;
             }
@@ -28,9 +28,10 @@ namespace HarryPotterPotions.Models
 
         }
 
-        public Cart(List<Ingredient> ingredients)
+        public Cart(List<Ingredient> ingredients, ObservableCollection<Item> cartItems)
         {
             Ingredients = ingredients;
+            CartItems = cartItems;
         }
     }
 }

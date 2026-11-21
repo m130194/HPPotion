@@ -12,7 +12,7 @@ namespace HarryPotterPotions.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public int MarketPrice { get; set; }
+        public int IngredientPrice { get; set; }
 
         public Ingredient(string name)
         {
@@ -22,7 +22,7 @@ namespace HarryPotterPotions.Models
         public Ingredient(string name, int marketPrice)
         {
             Name = name;
-            MarketPrice = marketPrice;
+            IngredientPrice = marketPrice;
         }
 
     }

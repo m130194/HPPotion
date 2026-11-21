@@ -39,15 +39,7 @@ namespace HarryPotterPotions.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged(
-            [CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(
-                this,
-                new PropertyChangedEventArgs(propertyName));
-        }
 
         public InventoryViewModel(SQLService SqlService, Repository repository)
         {
@@ -135,5 +127,15 @@ namespace HarryPotterPotions.ViewModels
             SeeItemsAsync(); // Refresh the inventory to reflect the updated quantity
         }
 
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(
+            [CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

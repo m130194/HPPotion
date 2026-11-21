@@ -39,13 +39,27 @@ namespace HarryPotterPotions.Services
                 int totalPrice = 0;
                 foreach (Item item in ShoppingCart)
                 {
-                    totalPrice += item.TotalPrice;
+                    totalPrice += item.ItemPrice;
                 }
                 return totalPrice;
             }
         }
 
-        public Cart UserCart;
+        private Cart _userCart;
+        public Cart UserCart
+        {
+            get => _userCart;
+            set
+            {
+                if (_userCart != value)
+                {
+                    _userCart = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TotalCartPrice));
+                }
+            }
+        }
+
         public Repository()
         {
             // Initialize the Ingredients collection with some sample ingredients
@@ -65,7 +79,7 @@ namespace HarryPotterPotions.Services
             };
 
             //Create Cart instance in constructor of Repository
-            UserCart = new Cart(Ingredients);
+            UserCart = new Cart(Ingredients, ShoppingCart);
         }
 
 

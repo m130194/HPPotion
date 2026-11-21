@@ -24,7 +24,7 @@ namespace HarryPotterPotions.Models
                 {
                     _quantity = value;
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(TotalPrice));
+                    OnPropertyChanged(nameof(ItemPrice));
                 }
             }
         }
@@ -32,9 +32,9 @@ namespace HarryPotterPotions.Models
         //This is a placeholder for a future feature where the user can specify a custom price for an ingredient in their inventory. For now, it will default to the market price of the ingredient.
 
 
-        public int TotalPrice
+        public int ItemPrice
         {
-            get => Ingredient.MarketPrice * Quantity;
+            get => Ingredient.IngredientPrice * Quantity;
 
         }
 
